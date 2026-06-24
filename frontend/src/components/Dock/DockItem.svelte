@@ -29,6 +29,7 @@
 	import { spring, tweened } from 'svelte/motion';
 	import { elevation } from '$lib/actions';
 	import { apps_config } from '$lib/configs/apps/apps-config.ts';
+	import { app_icon } from '$lib/helpers/asset-path.ts';
 	import { apps, type AppID } from '$lib/state/apps.svelte.ts';
 	import { preferences } from '$lib/state/preferences.svelte.ts';
 
@@ -128,6 +129,8 @@
 
 	const is_app_store = $derived(app_id === 'appstore');
 	const show_pwa_badge = $derived(is_app_store && needs_update);
+	const webp_icon = $derived(app_icon(app_id, '256.webp'));
+	const png_icon = $derived(app_icon(app_id, '256.png'));
 
 	$effect(() => {
 		if (show_pwa_badge) bounceEffect();
@@ -149,10 +152,10 @@
 	<span style:transform="translate(0, {$appOpenIconBounceTransform}px)">
 		<img
 			bind:this={image_el}
-			src="/app-icons/{app_id}/256.webp"
+			src={webp_icon}
 			onerror={(e) => {
 				const img = e.currentTarget as HTMLImageElement;
-				if (!img.src.endsWith('256.png')) img.src = `/app-icons/${app_id}/256.png`;
+				if (!img.src.endsWith('256.png')) img.src = png_icon;
 			}}
 			alt="{title} app"
 			style:width="{$width_px / 16}rem"

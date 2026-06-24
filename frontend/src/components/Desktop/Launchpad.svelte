@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { apps_config } from '$lib/configs/apps/apps-config.ts';
+	import { app_icon } from '$lib/helpers/asset-path.ts';
 	import { open_app } from '$lib/helpers/open-app.ts';
 	import { system } from '$lib/state/system.svelte.ts';
 	import type { AppID } from '$lib/state/apps.svelte.ts';
@@ -7,7 +8,7 @@
 
 	type Item = { id: AppID; title: string; icon: string };
 
-	const icon_for = (id: AppID) => apps_config[id].icon ?? `/app-icons/${id}/256.png`;
+	const icon_for = (id: AppID) => apps_config[id].icon ?? app_icon(id);
 
 	const all: Item[] = (Object.keys(apps_config) as AppID[])
 		.filter((id) => id !== 'launchpad')
