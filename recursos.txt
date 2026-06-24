@@ -1,0 +1,106 @@
+### 🥇 1. Aqua Screenshot Library
+
+La mejor para estudiar la interfaz completa.
+
+[Aqua Screenshot Library](https://512pixels.net/projects/aqua-screenshot-library/?utm_source=chatgpt.com)
+
+**Ventajas**
+
+* Más de 1.500 capturas.
+* Organizadas por versión de macOS.
+* Finder, Dock, Spotlight, Mission Control, Preferencias, etc.
+* Puedes ver la evolución histórica.
+
+**Desventaja**
+
+* No muestra animaciones.
+
+---
+
+### 🥈 2. Apple Human Interface Guidelines
+
+La mejor para entender cómo debería comportarse cada componente.
+
+[Apple Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/?utm_source=chatgpt.com)
+
+**Ventajas**
+
+* Componentes oficiales.
+* Estados y comportamientos.
+* Patrones UX.
+
+**Desventaja**
+
+* No documenta todo macOS pantalla por pantalla.
+
+---
+
+### 🥉 3. El blog de Harshil Shah
+
+La mejor para entender animaciones complejas como Genie.
+
+[Recreating the Mac Genie Effect](https://harshil.net/blog/recreating-the-mac-genie-effect/?utm_source=chatgpt.com)
+
+Y el código:
+
+[Genie GitHub Project](https://github.com/HarshilShah/Genie?utm_source=chatgpt.com)
+
+**Ventajas**
+
+* Explica la matemática.
+* Explica la malla deformable.
+* Tiene implementación real.
+
+---
+
+### Lo que haría yo para ArchMac
+
+Usaría las tres juntas:
+
+```text
+Aqua Screenshot Library
+        ↓
+Documentar pantallas
+
+Apple HIG
+        ↓
+Documentar comportamiento
+
+Harshil / Genie
+        ↓
+Documentar animaciones
+```
+
+Si me preguntas por **una sola web**, la respuesta es:
+
+> **Aqua Screenshot Library**.
+
+Es la que más se acerca a una "Wikipedia visual de macOS". Lo que pasa es que no llega al nivel de detalle que tú quieres (gestos, animaciones, estados ocultos, transiciones, física de ventanas). Para eso tendrás que complementar con videos y documentación técnica.
+
+De hecho, para ArchMac yo empezaría por crear un inventario basado en Aqua:
+
+```text
+macOS Tahoe
+├── Desktop
+├── Finder
+├── Dock
+├── Spotlight
+├── Mission Control
+├── Launchpad
+├── Control Center
+├── Notifications
+├── Settings
+├── Widgets
+├── Stage Manager
+├── Lock Screen
+├── Login Screen
+├── App Switcher
+├── Gestures
+├── Animations
+│   ├── Genie
+│   ├── Maximize
+│   ├── Mission Control
+│   ├── Desktop Switch
+│   └── Launchpad
+└── ...
+```

@@ -1,0 +1,469 @@
+/* ArchMac — sitio del proyecto. Diseño sobrio: plano, mucho aire, una sola tinta de acento. */
+
+:root {
+	--bg: #16181d;
+	--bg-alt: #191c22;
+	--panel: #1d2027;
+	--border: rgba(255, 255, 255, 0.07);
+	--border-2: rgba(255, 255, 255, 0.13);
+
+	--text: #e8eaee;
+	--muted: #8a909b;
+	--faint: #5b616b;
+
+	--accent: #4c9aff;
+
+	--maxw: 1080px;
+	--font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+	--mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+html {
+	scroll-behavior: smooth;
+	scroll-padding-top: 5rem;
+}
+body {
+	font-family: var(--font);
+	background: var(--bg);
+	color: var(--text);
+	line-height: 1.65;
+	-webkit-font-smoothing: antialiased;
+}
+a {
+	color: inherit;
+	text-decoration: none;
+}
+img {
+	max-width: 100%;
+	display: block;
+}
+
+.wrap {
+	width: 100%;
+	max-width: var(--maxw);
+	margin: 0 auto;
+	padding: 0 1.5rem;
+}
+
+/* Regla de acento bajo los títulos (estilo Archcraft) */
+.rule {
+	width: 44px;
+	height: 2px;
+	background: var(--accent);
+	border-radius: 2px;
+}
+
+/* ---------- Nav ---------- */
+.nav {
+	position: sticky;
+	top: 0;
+	z-index: 50;
+	background: rgba(22, 24, 29, 0.85);
+	backdrop-filter: blur(10px);
+	border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+	display: flex;
+	align-items: center;
+	height: 4rem;
+}
+.brand {
+	display: flex;
+	align-items: center;
+	gap: 0.55rem;
+	font-weight: 600;
+	font-size: 1.02rem;
+	letter-spacing: -0.01em;
+}
+.brand .mark {
+	width: 1.55rem;
+	height: 1.55rem;
+	border-radius: 6px;
+	border: 1px solid var(--border-2);
+	display: grid;
+	place-items: center;
+	font-size: 0.85rem;
+	color: var(--accent);
+}
+.nav-links {
+	display: flex;
+	gap: 0.3rem;
+	margin: 0 auto;
+	font-size: 0.9rem;
+}
+.nav-links a {
+	color: var(--muted);
+	padding: 0.45rem 0.9rem;
+	border-radius: 7px;
+	transition: color 0.15s ease, background 0.15s ease;
+}
+.nav-links a:hover {
+	color: var(--text);
+	background: rgba(255, 255, 255, 0.04);
+}
+.btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.45rem;
+	padding: 0.55rem 1.1rem;
+	border-radius: 8px;
+	font-weight: 500;
+	font-size: 0.9rem;
+	border: 1px solid var(--border-2);
+	background: transparent;
+	color: var(--text);
+	cursor: pointer;
+	transition: border-color 0.15s ease, background 0.15s ease;
+}
+.btn:hover {
+	border-color: var(--accent);
+}
+.btn-primary {
+	background: var(--accent);
+	border-color: var(--accent);
+	color: #07101f;
+	font-weight: 600;
+}
+.btn-primary:hover {
+	background: #62a8ff;
+	border-color: #62a8ff;
+}
+.btn-lg {
+	padding: 0.72rem 1.3rem;
+	font-size: 0.95rem;
+}
+
+/* ---------- Hero / Qué es ---------- */
+.hero {
+	padding: 5rem 0 5.5rem;
+}
+.hero-grid {
+	display: grid;
+	grid-template-columns: 1fr 1.1fr;
+	gap: 4rem;
+	align-items: center;
+}
+.kicker {
+	font-family: var(--mono);
+	font-size: 0.8rem;
+	color: var(--accent);
+	letter-spacing: 0.02em;
+	margin-bottom: 1.1rem;
+}
+.hero h1 {
+	font-size: clamp(2.2rem, 4.5vw, 3.3rem);
+	line-height: 1.08;
+	letter-spacing: -0.03em;
+	font-weight: 700;
+	margin-bottom: 1.4rem;
+}
+.hero p {
+	color: var(--muted);
+	font-size: 1.05rem;
+	margin: 1.6rem 0 2rem;
+	max-width: 30rem;
+}
+.hero .actions {
+	display: flex;
+	gap: 0.8rem;
+	flex-wrap: wrap;
+}
+
+.shot {
+	border-radius: 10px;
+	overflow: hidden;
+	border: 1px solid var(--border-2);
+	box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+}
+.shot img {
+	width: 100%;
+}
+
+/* ---------- Secciones ---------- */
+section {
+	padding: 5.5rem 0;
+	border-top: 1px solid var(--border);
+}
+section.alt {
+	background: var(--bg-alt);
+}
+.head {
+	margin-bottom: 3.2rem;
+}
+.head.center {
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.head h2 {
+	font-size: clamp(1.7rem, 3.2vw, 2.3rem);
+	letter-spacing: -0.025em;
+	font-weight: 700;
+	margin-bottom: 1rem;
+}
+.head p {
+	color: var(--muted);
+	max-width: 38rem;
+}
+.head .rule {
+	margin-top: 0.2rem;
+}
+.head.center .rule {
+	margin: 0 auto 1.2rem;
+}
+
+/* Características */
+.features {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: 1px;
+	background: var(--border);
+	border: 1px solid var(--border);
+	border-radius: 12px;
+	overflow: hidden;
+}
+.feature {
+	background: var(--bg);
+	padding: 1.8rem;
+	transition: background 0.15s ease;
+}
+section.alt .feature {
+	background: var(--bg-alt);
+}
+.feature:hover {
+	background: var(--panel);
+}
+.feature .n {
+	font-family: var(--mono);
+	font-size: 0.8rem;
+	color: var(--accent);
+	margin-bottom: 0.9rem;
+}
+.feature h3 {
+	font-size: 1.05rem;
+	font-weight: 600;
+	margin-bottom: 0.5rem;
+	letter-spacing: -0.01em;
+}
+.feature p {
+	color: var(--muted);
+	font-size: 0.92rem;
+}
+
+/* Galería */
+.gallery {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+	gap: 1.2rem;
+}
+.gallery figure {
+	border: 1px solid var(--border);
+	border-radius: 10px;
+	overflow: hidden;
+	background: var(--panel);
+}
+.gallery img {
+	width: 100%;
+	aspect-ratio: 16 / 10;
+	object-fit: cover;
+	object-position: top;
+	border-bottom: 1px solid var(--border);
+}
+.gallery figcaption {
+	padding: 0.85rem 1.1rem;
+	font-size: 0.88rem;
+	color: var(--muted);
+}
+.gallery figcaption b {
+	color: var(--text);
+	font-weight: 600;
+}
+
+/* Proyecto / dos pistas */
+.tracks {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1.5rem;
+}
+.track {
+	border: 1px solid var(--border);
+	border-radius: 12px;
+	padding: 1.9rem;
+	background: var(--bg);
+}
+section.alt .track {
+	background: var(--bg-alt);
+}
+.track .num {
+	font-family: var(--mono);
+	font-size: 0.8rem;
+	color: var(--accent);
+}
+.track h3 {
+	font-size: 1.2rem;
+	margin: 0.5rem 0 0.7rem;
+	letter-spacing: -0.01em;
+}
+.track p {
+	color: var(--muted);
+	font-size: 0.94rem;
+}
+.track ul {
+	margin-top: 1.1rem;
+	list-style: none;
+	display: grid;
+	gap: 0.55rem;
+}
+.track li {
+	font-size: 0.9rem;
+	color: var(--muted);
+	padding-left: 1.3rem;
+	position: relative;
+}
+.track li::before {
+	content: '–';
+	position: absolute;
+	left: 0;
+	color: var(--accent);
+}
+
+/* Terminal */
+.terminal {
+	border: 1px solid var(--border-2);
+	border-radius: 10px;
+	overflow: hidden;
+	background: #101216;
+	max-width: 620px;
+	margin: 0 auto;
+}
+.terminal .bar {
+	display: flex;
+	align-items: center;
+	gap: 0.7rem;
+	padding: 0.6rem 0.9rem;
+	border-bottom: 1px solid var(--border);
+	font-family: var(--mono);
+	font-size: 0.78rem;
+	color: var(--faint);
+}
+.terminal .dots {
+	display: flex;
+	gap: 0.35rem;
+}
+.terminal .dots i {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background: var(--border-2);
+	display: inline-block;
+}
+.terminal pre {
+	padding: 1.2rem 1.3rem;
+	font-family: var(--mono);
+	font-size: 0.85rem;
+	line-height: 1.85;
+	color: #c4ccd6;
+	overflow-x: auto;
+}
+.terminal .c {
+	color: var(--accent);
+}
+.terminal .d {
+	color: var(--faint);
+}
+
+/* Docs */
+.docs {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	gap: 1px;
+	background: var(--border);
+	border: 1px solid var(--border);
+	border-radius: 12px;
+	overflow: hidden;
+}
+.doc {
+	background: var(--bg);
+	padding: 1.4rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+	transition: background 0.15s ease;
+}
+section.alt .doc {
+	background: var(--bg-alt);
+}
+.doc:hover {
+	background: var(--panel);
+}
+.doc .f {
+	font-family: var(--mono);
+	font-size: 0.78rem;
+	color: var(--accent);
+}
+.doc b {
+	font-size: 0.98rem;
+	font-weight: 600;
+}
+.doc span {
+	color: var(--muted);
+	font-size: 0.86rem;
+}
+
+/* CTA */
+.cta {
+	text-align: center;
+}
+.cta h2 {
+	font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+	letter-spacing: -0.025em;
+	margin-bottom: 0.8rem;
+}
+.cta p {
+	color: var(--muted);
+	margin-bottom: 1.8rem;
+}
+
+/* Footer */
+.foot {
+	border-top: 1px solid var(--border);
+	padding: 2.4rem 0;
+	color: var(--faint);
+	font-size: 0.86rem;
+}
+.foot-inner {
+	display: flex;
+	justify-content: space-between;
+	gap: 1rem;
+	flex-wrap: wrap;
+	align-items: center;
+}
+.foot a {
+	color: var(--muted);
+}
+.foot a:hover {
+	color: var(--text);
+}
+.legal {
+	margin-top: 1.2rem;
+	font-size: 0.79rem;
+	color: var(--faint);
+	max-width: 46rem;
+}
+
+@media (max-width: 800px) {
+	.nav-links {
+		display: none;
+	}
+	.hero-grid,
+	.tracks {
+		grid-template-columns: 1fr;
+		gap: 2.5rem;
+	}
+}
