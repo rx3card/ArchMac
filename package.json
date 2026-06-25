@@ -5,10 +5,16 @@
 	"type": "module",
 	"description": "Sitio del proyecto ArchMac (web + documentación). La simulación vive en /frontend.",
 	"scripts": {
-		"dev": "vite",
-		"build": "vite build",
+		"dev": "node scripts/dev.mjs",
+		"dev:web": "vite",
+		"dev:frontend": "pnpm --dir frontend exec vite --base=/frontend/ --port 5173",
+		"build": "node scripts/build.mjs",
+		"build:web": "vite build",
+		"build:frontend": "pnpm --dir frontend exec vite build --base=/frontend/ --outDir=../dist/frontend --emptyOutDir",
 		"preview": "vite preview",
-		"check": "svelte-check --tsconfig ./tsconfig.json"
+		"check": "svelte-check --tsconfig ./tsconfig.json",
+		"check:frontend": "pnpm --dir frontend check",
+		"check:all": "pnpm check && pnpm check:frontend"
 	},
 	"devDependencies": {
 		"@sveltejs/vite-plugin-svelte": "^4.0.0",
