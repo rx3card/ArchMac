@@ -4,7 +4,7 @@
 > macOS**, sobre Wayland/Hyprland. Rediseñada desde cero para velocidad, eficiencia, simplicidad
 > y control, con identidad visual propia, instalador gráfico.
 
-ArchMac o este royecto en general se desarrolla en **dos partes**:
+ArchMac o este proyecto en general se desarrolla en **dos partes**:
 
 1. **Sitio Web & Simulación** (este repositorio): Un prototipo web que simula la/el distribución/escritorio completo
    (dock, ventanas, animaciones, apps, arranque, instalador). Sirve para validar el diseño y
