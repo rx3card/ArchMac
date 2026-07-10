@@ -8,7 +8,7 @@
 		"dev": "node scripts/dev.mjs",
 		"dev:web": "vite",
 		"dev:frontend": "pnpm --dir frontend exec vite --base=/frontend/ --port 5173",
-		"build": "node scripts/build.mjs",
+		"build": "vite build",
 		"build:web": "vite build",
 		"build:frontend": "pnpm --dir frontend exec vite build --base=/frontend/ --outDir=../dist/frontend --emptyOutDir",
 		"preview": "vite preview",
