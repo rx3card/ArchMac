@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { apps_config } from '$lib/configs/apps/apps-config.ts';
+	import { app_icon } from '$lib/helpers/asset-path.ts';
 	import type { AppID } from '$lib/state/apps.svelte.ts';
 
 	const { app_id }: { app_id: AppID } = $props();
@@ -13,7 +14,7 @@
 	</header>
 
 	<div class="body">
-		<img src="/app-icons/{app_id}/256.png" alt={title} draggable="false" />
+		<img src={app_icon(app_id)} alt={title} draggable="false" />
 		<h1>{title}</h1>
 		<p>Esta app de ArchMac está en construcción.</p>
 		<p class="muted">Prototipo visual — pronto tendrá contenido real.</p>

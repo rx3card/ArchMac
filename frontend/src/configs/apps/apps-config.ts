@@ -1,4 +1,5 @@
 import { create_app_config } from '$lib/helpers/create-app-config.ts';
+import { public_asset } from '$lib/helpers/asset-path.ts';
 import { system } from '$lib/state/system.svelte.ts';
 
 const finder = create_app_config({
@@ -98,7 +99,7 @@ const install = create_app_config({
 	resizable: true,
 
 	dock_hidden: true,
-	icon: '/app-icons/apple-install.svg',
+	icon: public_asset('/app-icons/apple-install.svg'),
 
 	width: 820,
 	height: 560,

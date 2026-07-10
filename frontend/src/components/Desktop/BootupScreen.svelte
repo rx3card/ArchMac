@@ -4,6 +4,7 @@
 	import { tweened } from 'svelte/motion';
 	import AppleIcon from '~icons/mdi/apple';
 	import { elevation } from '$lib/actions';
+	import { public_asset } from '$lib/helpers/asset-path.ts';
 	import { fade_out } from '$lib/helpers/fade.ts';
 	import { sleep } from '$lib/helpers/sleep';
 
@@ -36,7 +37,7 @@
 
 <!-- iframe => firefox support: will always make sound available on start or F5 -->
 {#if import.meta.env.PROD}
-	<iframe id="audio" src="/sounds/mac-startup-sound.mp3" allow="autoplay" title="hello"></iframe>
+	<iframe id="audio" src={public_asset('/sounds/mac-startup-sound.mp3')} allow="autoplay" title="hello"></iframe>
 {/if}
 
 <style>

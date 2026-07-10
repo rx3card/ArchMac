@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { apps_config } from '$lib/configs/apps/apps-config.ts';
+	import { app_icon } from '$lib/helpers/asset-path.ts';
 	import { system } from '$lib/state/system.svelte.ts';
 	import { switcher, switcher_commit } from '$lib/state/switcher.svelte.ts';
 
@@ -26,7 +27,7 @@
 					onmouseenter={() => (switcher.index = i)}
 					onclick={() => switcher_commit()}
 				>
-					<img src="/app-icons/{id}/256.png" alt={apps_config[id].title} draggable="false" />
+					<img src={app_icon(id)} alt={apps_config[id].title} draggable="false" />
 				</div>
 			{/each}
 		</div>
