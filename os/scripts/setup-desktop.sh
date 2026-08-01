@@ -29,6 +29,29 @@ cp -r "$REPO/os/shell/quickshell" "$HOME/.config/quickshell/archmac"
 # Iconos de la simulación (provisionales) para el dock
 cp -r "$REPO/web/simulation/public/app-icons" "$HOME/.config/quickshell/archmac/icons"
 
+msg "Instalando tema macOS (WhiteSur GTK + cursores)…"
+sudo pacman -S --needed --noconfirm sassc
+CACHE="$HOME/.cache/archmac-themes"
+mkdir -p "$CACHE"
+if [ ! -d "$CACHE/WhiteSur-gtk-theme" ]; then
+	git clone --depth=1 https://github.com/vinceliuice/WhiteSur-gtk-theme "$CACHE/WhiteSur-gtk-theme"
+fi
+# Tema GTK a ~/.themes (sin sudo) y soporte libadwaita (~/.config/gtk-4.0)
+bash "$CACHE/WhiteSur-gtk-theme/install.sh" -d "$HOME/.themes" -c Dark || true
+bash "$CACHE/WhiteSur-gtk-theme/install.sh" -l -c Dark || true
+
+if [ ! -d "$CACHE/WhiteSur-cursors" ]; then
+	git clone --depth=1 https://github.com/vinceliuice/WhiteSur-cursors "$CACHE/WhiteSur-cursors"
+fi
+bash "$CACHE/WhiteSur-cursors/install.sh" || true
+
+if command -v gsettings >/dev/null 2>&1; then
+	gsettings set org.gnome.desktop.interface gtk-theme 'WhiteSur-Dark' 2>/dev/null || true
+	gsettings set org.gnome.desktop.interface cursor-theme 'WhiteSur-cursors' 2>/dev/null || true
+fi
+# Reiniciar el servicio de Nautilus para que tome el tema
+nautilus -q 2>/dev/null || true
+
 msg "Botones de ventana a la izquierda (estilo macOS)…"
 if command -v gsettings >/dev/null 2>&1; then
 	gsettings set org.gnome.desktop.wm.preferences button-layout 'close,minimize,maximize:' 2>/dev/null || true
