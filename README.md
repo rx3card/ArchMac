@@ -1,15 +1,16 @@
 # ArchMac
 
-> **Proyecto en desarrollo activo.** Distribución **Linux basada en Arch** con una
-> experiencia de escritorio **premium inspirada en macOS**, sobre Wayland/Hyprland: la
+> **Proyecto en desarrollo.** Distribución **Linux basada en Arch** con la
+> experiencia de escritorio **inspirada en macOS**, sobre Wayland/Hyprland: la
 > facilidad de uso de Windows/macOS con la potencia y libertad de Linux.
 >
 > Todavía **no existe una ISO descargable** ni versión estable. Este repositorio documenta y
 > contiene todo el desarrollo en curso.
 
-**Objetivos:** UI/UX al nivel de macOS (animaciones, blur, transparencias, consistencia) ·
-rendimiento de un Arch minimalista · funcionar bien en **4 GB de RAM** · estable, seguro y
-mantenible.
+**Objetivos:** UI/UX al nivel de macOS (animaciones, blur, transparencias, consistencia),
+rendimiento de un Arch minimalista,
+funcionar bien en **4 GB de RAM**,
+estable, seguro y mantenible.
 
 ---
 
@@ -41,7 +42,7 @@ ArchMac/
 
 ## Qué se ha realizado hasta el momento
 
-### El escritorio real (funcionando en VM con Arch + Hyprland)
+### El escritorio (funcionando en VM con Arch + Hyprland)
 
 - **Compositor configurado** — ventanas **flotantes por defecto** (filosofía macOS, no tiling),
   blur, sombras suaves, esquinas redondeadas, animaciones con curvas tipo macOS, scroll
@@ -101,4 +102,4 @@ Para levantar **el sistema operativo** en una máquina virtual, sigue
 ## Nota legal
 
 El nombre y los **iconos, wallpapers y logotipos de estilo Apple** usados durante el prototipo
-son **provisionales**: se reemplazarán por identidad propia antes de distribuir cualquier ISO.
+son **provisionales**. Se reemplazarán por identidad propia antes de distribuir cualquier ISO.
