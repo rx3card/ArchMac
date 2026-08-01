@@ -6,7 +6,6 @@
 // ============================================================
 import QtQuick
 import Quickshell
-import Quickshell.Widgets
 
 PanelWindow {
 	id: root
@@ -27,14 +26,16 @@ PanelWindow {
 	readonly property int slotSpacing: 10
 
 	// --- Apps fijadas (v0: lista estática; luego vendrá de un config) ---
+	// Iconos: los MISMOS de la simulación (web/simulation/public/app-icons),
+	// copiados por setup-desktop.sh a icons/. PROVISIONALES (activos de Apple).
 	readonly property var apps: [
-		{ name: "Archivos", icon: "org.gnome.Nautilus", cmd: ["nautilus", "--new-window"] },
-		{ name: "Firefox", icon: "firefox", cmd: ["firefox"] },
-		{ name: "Calendario", icon: "org.gnome.Calendar", cmd: ["gnome-calendar"] },
-		{ name: "Calculadora", icon: "org.gnome.Calculator", cmd: ["gnome-calculator"] },
-		{ name: "Editor", icon: "org.gnome.TextEditor", cmd: ["gnome-text-editor"] },
-		{ name: "Terminal", icon: "kitty", cmd: ["kitty"] },
-		{ name: "Apps", icon: "view-app-grid-symbolic", cmd: ["wofi", "--show", "drun"] }
+		{ name: "Archivos", icon: "finder", cmd: ["nautilus", "--new-window"] },
+		{ name: "Launchpad", icon: "launchpad", cmd: ["wofi", "--show", "drun"] },
+		{ name: "Navegador", icon: "safari", cmd: ["firefox"] },
+		{ name: "Calendario", icon: "calendar", cmd: ["gnome-calendar"] },
+		{ name: "Calculadora", icon: "calculator", cmd: ["gnome-calculator"] },
+		{ name: "Notas", icon: "notes", cmd: ["gnome-text-editor"] },
+		{ name: "Terminal", icon: "terminal", cmd: ["kitty"] }
 	]
 
 	implicitWidth: iconRow.width + 40
@@ -79,14 +80,17 @@ PanelWindow {
 				// Rebote al lanzar
 				property real bounce: 0
 
-				IconImage {
+				Image {
 					id: icon
 					anchors.horizontalCenter: parent.horizontalCenter
 					anchors.bottom: parent.bottom
 					anchors.bottomMargin: slot.bounce
 					width: root.baseSize
 					height: root.baseSize
-					source: Quickshell.iconPath(modelData.icon, true)
+					source: Qt.resolvedUrl("icons/" + modelData.icon + "/256.png")
+					fillMode: Image.PreserveAspectFit
+					smooth: true
+					mipmap: true
 					scale: slot.boost
 					transformOrigin: Item.Bottom
 

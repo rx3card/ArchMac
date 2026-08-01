@@ -26,6 +26,8 @@ msg "Instalando el shell (dock Quickshell)…"
 mkdir -p "$HOME/.config/quickshell"
 rm -rf "$HOME/.config/quickshell/archmac"
 cp -r "$REPO/os/shell/quickshell" "$HOME/.config/quickshell/archmac"
+# Iconos de la simulación (provisionales) para el dock
+cp -r "$REPO/web/simulation/public/app-icons" "$HOME/.config/quickshell/archmac/icons"
 
 msg "Configurando autoarranque del escritorio (login en tty1)…"
 if ! grep -q ARCHMAC_AUTOSTART "$HOME/.bash_profile" 2>/dev/null; then
