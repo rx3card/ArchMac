@@ -52,6 +52,13 @@ fi
 # Reiniciar el servicio de Nautilus para que tome el tema
 nautilus -q 2>/dev/null || true
 
+msg "Instalando hyprbars (semáforo para apps sin barra propia, p. ej. la terminal)…"
+sudo pacman -S --needed --noconfirm cmake meson cpio pkgconf gcc git
+hyprpm update || true
+hyprpm add https://github.com/hyprwm/hyprland-plugins 2>/dev/null || true
+hyprpm enable hyprbars || true
+hyprpm reload -n || true
+
 msg "Botones de ventana a la izquierda (estilo macOS)…"
 if command -v gsettings >/dev/null 2>&1; then
 	gsettings set org.gnome.desktop.wm.preferences button-layout 'close,minimize,maximize:' 2>/dev/null || true

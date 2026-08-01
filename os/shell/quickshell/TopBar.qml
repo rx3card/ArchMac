@@ -76,35 +76,41 @@ PanelWindow {
 		}
 	}
 
-	// ----- Derecha: estados + reloj -----
+	// ----- Derecha: estados (los SVG propios de la simulación) + reloj -----
 	Row {
 		anchors.verticalCenter: parent.verticalCenter
 		anchors.right: parent.right
 		anchors.rightMargin: 16
-		spacing: 16
+		spacing: 15
 
-		Text {
-			text: "󰕾"
-			color: "#f5f5f7"
-			font.family: "Symbols Nerd Font"
-			font.pixelSize: 13
+		Image {
+			source: Qt.resolvedUrl("assets/wifi.svg")
+			sourceSize.height: 15
+			sourceSize.width: 16
 			anchors.verticalCenter: parent.verticalCenter
+			smooth: true
 		}
 
-		Text {
-			text: "󰤨"
-			color: "#f5f5f7"
-			font.family: "Symbols Nerd Font"
-			font.pixelSize: 13
+		Image {
+			source: Qt.resolvedUrl("assets/battery.svg")
+			sourceSize.height: 13
+			sourceSize.width: 28
 			anchors.verticalCenter: parent.verticalCenter
+			smooth: true
 		}
 
-		Text {
-			text: "󰁹"
-			color: "#f5f5f7"
-			font.family: "Symbols Nerd Font"
-			font.pixelSize: 13
+		Image {
+			source: Qt.resolvedUrl("assets/spotlight.svg")
+			sourceSize.height: 14
+			sourceSize.width: 14
 			anchors.verticalCenter: parent.verticalCenter
+			smooth: true
+
+			MouseArea {
+				anchors.fill: parent
+				anchors.margins: -6
+				onClicked: Quickshell.execDetached(["wofi", "--show", "drun"])
+			}
 		}
 
 		Text {
