@@ -64,6 +64,7 @@ noto-fonts-cjk
 # --- Polkit / integración ---
 polkit
 polkit-gnome
+xdg-desktop-portal-gtk
 
 # --- Herramientas útiles en live ---
 htop

@@ -1,7 +1,7 @@
 /* ============================================================
-   ArchMac — Semáforo macOS en apps GTK4/libadwaita (capa 1-2 del ADR-0004)
-   Redibuja los botones cerrar/minimizar/maximizar de TODAS las
-   apps GTK sin modificarlas. Los glifos aparecen solo al hover.
+   ArchMac — Semáforo macOS en apps GTK4/libadwaita (fallback propio)
+   Círculos exactos de 13px, colores reales de macOS.
+   Si WhiteSur está instalado, su gtk.css reemplaza a este.
    ============================================================ */
 
 windowcontrols {
@@ -9,7 +9,8 @@ windowcontrols {
 	margin-right: 8px;
 }
 
-windowcontrols button {
+/* El truco del círculo: botón E icono interno forzados a 13px, sin padding */
+windowcontrols > button {
 	min-width: 13px;
 	min-height: 13px;
 	padding: 0;
@@ -20,27 +21,37 @@ windowcontrols button {
 	box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
 }
 
-/* Glifo oculto hasta pasar el cursor, como macOS */
-windowcontrols button image {
-	opacity: 0;
+windowcontrols > button > image {
+	min-width: 13px;
+	min-height: 13px;
+	padding: 0;
+	margin: 0;
 	-gtk-icon-size: 9px;
+	opacity: 0;
 	color: rgba(0, 0, 0, 0.55);
 }
-windowcontrols:hover button image {
+
+/* Glifos ✕ − + visibles solo al pasar el cursor por el semáforo (como macOS) */
+windowcontrols:hover > button > image {
 	opacity: 1;
 }
 
-windowcontrols button.close    { background-color: #ff5f57; }
-windowcontrols button.minimize { background-color: #febc2e; }
-windowcontrols button.maximize { background-color: #28c840; }
+windowcontrols > button.close    { background-color: #ff5f57; }
+windowcontrols > button.minimize { background-color: #febc2e; }
+windowcontrols > button.maximize { background-color: #28c840; }
 
-windowcontrols button.close:active    { background-color: #e0443e; }
-windowcontrols button.minimize:active { background-color: #e0a52a; }
-windowcontrols button.maximize:active { background-color: #23a938; }
+windowcontrols > button.close:hover    { background-color: #ff5f57; }
+windowcontrols > button.minimize:hover { background-color: #febc2e; }
+windowcontrols > button.maximize:hover { background-color: #28c840; }
 
-/* Ventana sin foco: botones grises, como macOS */
-windowcontrols button.close:backdrop,
-windowcontrols button.minimize:backdrop,
-windowcontrols button.maximize:backdrop {
-	background-color: #57575c;
+windowcontrols > button.close:active    { background-color: #e0443e; }
+windowcontrols > button.minimize:active { background-color: #e0a52a; }
+windowcontrols > button.maximize:active { background-color: #23a938; }
+
+/* Ventana sin foco: el semáforo se atenúa (comportamiento macOS) */
+windowcontrols > button:backdrop {
+	opacity: 0.45;
+}
+windowcontrols > button:backdrop > image {
+	opacity: 0;
 }

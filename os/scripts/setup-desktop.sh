@@ -52,6 +52,18 @@ fi
 # Reiniciar el servicio de Nautilus para que tome el tema
 nautilus -q 2>/dev/null || true
 
+# --- Verificación visible del tema (para diagnosticar sin adivinar) ---
+if [ -d "$HOME/.themes/WhiteSur-Dark" ]; then
+	msg "Tema WhiteSur GTK: instalado ✔"
+else
+	printf '\033[1;31m==> AVISO:\033[0m WhiteSur NO se instaló — apps GTK3 usarán el semáforo propio\n'
+fi
+if grep -qi whitesur "$HOME/.config/gtk-4.0/gtk.css" 2>/dev/null; then
+	msg "libadwaita (GTK4): WhiteSur activo ✔"
+else
+	msg "libadwaita (GTK4): usando el semáforo propio de ArchMac (círculos 13px)"
+fi
+
 msg "Instalando hyprbars (semáforo para apps sin barra propia, p. ej. la terminal)…"
 sudo pacman -S --needed --noconfirm cmake meson cpio pkgconf gcc git
 hyprpm update || true
