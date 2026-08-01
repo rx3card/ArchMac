@@ -8,11 +8,24 @@ xorg-xwayland
 qt5-wayland
 qt6-wayland
 
+# --- Shell propio (Quickshell) ---
+quickshell
+
 # --- Sesión / utilidades del escritorio (provisionales hasta el shell propio) ---
 kitty
 wofi
 waybar
 swaybg
+
+# --- Aplicaciones de escritorio (equivalentes a las de la simulación) ---
+firefox
+nautilus
+gnome-calculator
+gnome-calendar
+gnome-text-editor
+
+# --- Iconos ---
+papirus-icon-theme
 brightnessctl
 playerctl
 pamixer
