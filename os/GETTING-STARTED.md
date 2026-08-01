@@ -23,7 +23,7 @@ La VM con entorno gráfico es donde se desarrolla y se siente la experiencia rea
    sudo pacman -Syu git
    git clone https://github.com/rx3card/ArchMac.git && cd ArchMac
    bash os/scripts/setup-desktop.sh   # paquetes + dotfiles + wallpaper, idempotente
-   Hyprland                           # arranca el escritorio
+   start-hyprland                     # arranca el escritorio (Hyprland ≥ 0.56)
    ```
 
 6. Iterar: `git pull && bash os/scripts/setup-desktop.sh` (recarga solo si Hyprland está activo).

@@ -32,4 +32,4 @@ if command -v hyprctl >/dev/null 2>&1 && [ -n "${HYPRLAND_INSTANCE_SIGNATURE:-}"
 	hyprctl dispatch exec waybar >/dev/null
 fi
 
-msg "Listo. Si no está corriendo, arranca el escritorio con: Hyprland"
+msg "Listo. Si no está corriendo, arranca el escritorio con: start-hyprland"
