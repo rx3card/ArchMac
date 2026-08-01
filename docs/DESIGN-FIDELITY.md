@@ -22,38 +22,38 @@ reconocible y coherente con lo ya construido. Tahoe (Liquid Glass) queda como po
 
 ## 2. Estado actual de ArchMac vs. la era objetivo
 
-✅ = hecho · 🟡 = parcial · ⬜ = pendiente
+[hecho] = hecho · [parcial] = parcial · [pendiente] = pendiente
 
 ### Escritorio y barras
-- ✅ Wallpaper Ventura · dock flotante con magnificación, rebote e indicadores
-- ✅ Barra superior: menú Apple (funcional), reloj, iconos de estado (Wi-Fi/batería/Spotlight propios)
-- 🟡 Menús de app en la barra: existen pero **estáticos** (no cambian según la app activa)
-- ⬜ **Centro de Control** desplegable (Wi-Fi, Bluetooth, brillo, volumen, concentración, música)
-- ⬜ **Centro de Notificaciones** + panel de widgets (deslizar desde la derecha)
+- [hecho] Wallpaper Ventura · dock flotante con magnificación, rebote e indicadores
+- [hecho] Barra superior: menú Apple (funcional), reloj, iconos de estado (Wi-Fi/batería/Spotlight propios)
+- [parcial] Menús de app en la barra: existen pero **estáticos** (no cambian según la app activa)
+- [pendiente] **Centro de Control** desplegable (Wi-Fi, Bluetooth, brillo, volumen, concentración, música)
+- [pendiente] **Centro de Notificaciones** + panel de widgets (deslizar desde la derecha)
 
 ### Ventanas (muy avanzado)
-- ✅ Semáforo, arrastrar, **redimensionar** por bordes, **maximizar (FLIP)**, **genie** minimizar/restaurar
-- ✅ Animaciones de **abrir/cerrar** (escala + fade simétricas)
-- 🟡 Vibrancy/traslucidez de barras laterales (parcial; afinar el "vidrio esmerilado")
-- ⬜ *Snapping*/mosaico al arrastrar a los bordes (macOS Sequoia)
+- [hecho] Semáforo, arrastrar, **redimensionar** por bordes, **maximizar (FLIP)**, **genie** minimizar/restaurar
+- [hecho] Animaciones de **abrir/cerrar** (escala + fade simétricas)
+- [parcial] Vibrancy/traslucidez de barras laterales (parcial; afinar el "vidrio esmerilado")
+- [pendiente] *Snapping*/mosaico al arrastrar a los bordes (macOS Sequoia)
 
 ### Navegación
-- ✅ Spotlight (⌘Espacio) · Launchpad · cambiador de apps (⌘Tab)
-- ⬜ **Mission Control** · App Exposé · Stage Manager · Hot Corners · Spaces
+- [hecho] Spotlight (⌘Espacio) · Launchpad · cambiador de apps (⌘Tab)
+- [pendiente] **Mission Control** · App Exposé · Stage Manager · Hot Corners · Spaces
 
 ### Apps
-- ✅ Calculadora · Calendario · **Ajustes (Apariencia: tema + acento, funcional)** · Acerca de ArchMac
-- 🟡 Resto (Safari, Mail, Mensajes, Mapas, Notas, Música, Terminal): ventana placeholder
-- ⬜ **Finder** navegable · Terminal simulada · más paneles de Ajustes
+- [hecho] Calculadora · Calendario · **Ajustes (Apariencia: tema + acento, funcional)** · Acerca de ArchMac
+- [parcial] Resto (Safari, Mail, Mensajes, Mapas, Notas, Música, Terminal): ventana placeholder
+- [pendiente] **Finder** navegable · Terminal simulada · más paneles de Ajustes
 
 ### Sistema / sesión
-- ✅ Arranque UEFI (menú GRUB estilo macOS) · Recovery · **Instalador ArchMacInstall** (app)
-- ✅ Apagado · logo de arranque (Apple)
-- ⬜ **Pantalla de bloqueo / login** (avatar, reloj grande, campo de contraseña)
+- [hecho] Arranque UEFI (menú GRUB estilo macOS) · Recovery · **Instalador ArchMacInstall** (app)
+- [hecho] Apagado · logo de arranque (Apple)
+- [pendiente] **Pantalla de bloqueo / login** (avatar, reloj grande, campo de contraseña)
 
 ### Identidad
-- ✅ Tema claro/oscuro + 7 colores de acento (cambian toda la UI)
-- ⬜ Iconografía/wallpaper/logo **propios** (los de Apple son PROVISIONALES → antes de la ISO)
+- [hecho] Tema claro/oscuro + 7 colores de acento (cambian toda la UI)
+- [pendiente] Iconografía/wallpaper/logo **propios** (los de Apple son PROVISIONALES → antes de la ISO)
 
 ## 3. Roadmap de fidelidad (orden de impacto)
 

@@ -1,6 +1,6 @@
 # ADR-0005 — Shell del escritorio: Quickshell vs AGS/Astal
 
-**Estado:** 🟡 pendiente — se decide con un *bake-off* al inicio de la Fase 2
+**Estado:** [parcial] pendiente — se decide con un *bake-off* al inicio de la Fase 2
 
 ## Contexto
 

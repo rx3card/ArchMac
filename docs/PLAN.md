@@ -138,7 +138,7 @@ ArchMac/
 | Marca "Mac" / activos de Apple → riesgo legal | **Revisar antes de publicar.** Iconos de macOS en uso son PROVISIONALES (solo prototipo); reemplazar por iconografía propia antes de la ISO |
 | Web prototype vs shell nativo (no confundir) | Resuelto: dos pistas |
 | AGS vs Quickshell (QML) vs waybar+eww | **Congelado** — se decide al llegar a Fase 2 |
-| SF Pro (licencia) | Usar Inter como sustituto libre ✅ |
+| SF Pro (licencia) | Usar Inter como sustituto libre [hecho] |
 | Alcance del instalador (no adelantarlo) | Diferido a Fase 4 |
 | Framework del prototipo | **Resuelto: fork de macos-web** (Svelte 5 + Vite + pnpm) |
 | Base del prototipo: ¿scratch o macos-web? | **Resuelto 2026-06-21: adoptar macos-web** |
@@ -151,42 +151,42 @@ ArchMac/
 ## 7. Estado actual y próximos pasos
 
 **Hecho:**
-- ✅ Exploración inicial + prototipo SvelteKit desde cero (archivado en `archive/frontend-scratch-v0`).
-- ✅ **Pivote:** adoptado el fork de `macos-web` como `/frontend` (base premium: wallpapers,
+- [hecho] Exploración inicial + prototipo SvelteKit desde cero (archivado en `archive/frontend-scratch-v0`).
+- [hecho] **Pivote:** adoptado el fork de `macos-web` como `/frontend` (base premium: wallpapers,
   logo Apple, dock con bounce, ventanas, genie, boot screen, apps reales). Corre con pnpm.
-- ✅ Rebrand inicial: título/metadatos a ArchMac, eliminada la analítica del autor original
+- [hecho] Rebrand inicial: título/metadatos a ArchMac, eliminada la analítica del autor original
   (Microsoft Clarity), `package.json` renombrado a `archmac` v0.1.0.
-- ✅ Pantalla de arranque (boot) estilo macOS activada también en dev (el autor la tenía
+- [hecho] Pantalla de arranque (boot) estilo macOS activada también en dev (el autor la tenía
   desactivada en `import.meta.env.DEV`): fondo negro, logo centrado, barra de progreso.
-- ✅ Rebrand profundo: app "About the Developer" → "Acerca de ArchMac" (carpeta y componente
+- [hecho] Rebrand profundo: app "About the Developer" → "Acerca de ArchMac" (carpeta y componente
   `AboutArchMac`, id `about-archmac`, icono provisional). Eliminadas del dock las apps promo
   del autor original (View Source → GitHub puruvj, Powered by Vercel). VSCode embed (stackblitz
   del repo original) reemplazado por placeholder propio. `pnpm check`: 0 errores / 0 warnings.
 
-- ✅ Bug de maximizar ventana arreglado: el código original movía `transform` pero neodrag v3
+- [hecho] Bug de maximizar ventana arreglado: el código original movía `transform` pero neodrag v3
   posiciona con la propiedad CSS `translate`, así que la ventana se desbordaba. Solución:
   maximizar vía clase CSS `.maximized` (`translate: 0 0 !important` + tamaño 100vw), que vence
   al inline de neodrag; al restaurar, la clase desaparece y neodrag recupera la posición previa.
 
-- ✅ Redimensionar ventanas por bordes y esquinas (8 handles, mínimos), con posición
+- [hecho] Redimensionar ventanas por bordes y esquinas (8 handles, mínimos), con posición
   controlada de neodrag (sin saltos al arrastrar tras redimensionar desde NW/N/W).
-- ✅ Minimizar al dock con animación (botón amarillo) + restaurar al hacer clic en el dock.
+- [hecho] Minimizar al dock con animación (botón amarillo) + restaurar al hacer clic en el dock.
   Es una aproximación al genie (escala+desplazamiento); el genie fiel necesitaría WebGL.
-- ✅ Catálogo de requisitos funcionales/no funcionales en `REQUISITOS.md` con roadmap.
-- ✅ Investigación de la UX de macOS (gestos/atajos/animaciones) en `README.md`.
-- ✅ Catálogo de apps ampliado (16): Finder, Launchpad, Safari, Mail, Mensajes, Mapas, Notas,
+- [hecho] Catálogo de requisitos funcionales/no funcionales en `REQUISITOS.md` con roadmap.
+- [hecho] Investigación de la UX de macOS (gestos/atajos/animaciones) en `README.md`.
+- [hecho] Catálogo de apps ampliado (16): Finder, Launchpad, Safari, Mail, Mensajes, Mapas, Notas,
   Música, Calendario, Calculadora, Terminal, VSCode, Wallpapers, Ajustes, App Store, Acerca de.
   Las nuevas abren ventana placeholder ("en construcción") con su icono real.
-- ✅ **Spotlight** (⌘/Ctrl+Espacio): buscar y abrir apps.
-- ✅ **Launchpad** (botón del dock / F4): cuadrícula con búsqueda y fondo desenfocado.
-- ✅ **Cambiador de apps** (⌘/Ctrl+Tab y swipe horizontal): overlay que cicla ventanas abiertas.
-- ✅ Fallback de icono png en el dock (apps sin .webp como Launchpad/Notas/Terminal).
+- [hecho] **Spotlight** (⌘/Ctrl+Espacio): buscar y abrir apps.
+- [hecho] **Launchpad** (botón del dock / F4): cuadrícula con búsqueda y fondo desenfocado.
+- [hecho] **Cambiador de apps** (⌘/Ctrl+Tab y swipe horizontal): overlay que cicla ventanas abiertas.
+- [hecho] Fallback de icono png en el dock (apps sin .webp como Launchpad/Notas/Terminal).
 - Nota: gestos de 3/4 dedos NO los expone el navegador → se simulan con atajos/botones/swipe.
 
-- ✅ **Efecto genie real** al minimizar/restaurar (deformación de malla por franjas + embudo con
+- [hecho] **Efecto genie real** al minimizar/restaurar (deformación de malla por franjas + embudo con
   curva cuadrática hacia el dock, basado en el algoritmo de Harshil Shah). Captura la ventana con
   `html-to-image` y la deforma en un `<canvas>`. Helper: `helpers/genie.ts`.
-- ✅ **Pantallas de sistema** (estética macOS) con conmutador `state/screen.svelte.ts` y `App.svelte`:
+- [hecho] **Pantallas de sistema** (estética macOS) con conmutador `state/screen.svelte.ts` y `App.svelte`:
   - **UEFI / Startup Manager** (`Boot/UefiBoot.svelte`): selector de volumen (ArchMac / Recovery).
   - **Recovery** (`Recovery/Recovery.svelte`): "Utilidades de ArchMac" (Reinstalar, Disco, Terminal…).
   - **Instalador gráfico ArchMacInstall** (`Installer/Installer.svelte`): asistente por pasos

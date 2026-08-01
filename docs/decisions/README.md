@@ -7,10 +7,10 @@ como reemplazada.
 
 | ADR | Decisión | Estado |
 |---|---|---|
-| [ADR-0001](ADR-0001-monorepo.md) | Monorepo con dos partes (`web/` + `os/`) | ✅ aceptada |
-| [ADR-0002](ADR-0002-base-arch-linux.md) | Arch Linux como base de la distro | ✅ aceptada |
-| [ADR-0003](ADR-0003-docs-astro-starlight.md) | Astro + Starlight para la web/documentación | ✅ aceptada |
-| [ADR-0004](ADR-0004-decoraciones-ventanas.md) | Estrategia de decoración de ventanas por capas | ✅ aceptada (en refinamiento) |
-| [ADR-0005](ADR-0005-shell-quickshell-vs-astal.md) | Shell del escritorio: Quickshell vs Astal | 🟡 pendiente — bake-off en Fase 2 |
+| [ADR-0001](ADR-0001-monorepo.md) | Monorepo con dos partes (`web/` + `os/`) | [hecho] aceptada |
+| [ADR-0002](ADR-0002-base-arch-linux.md) | Arch Linux como base de la distro | [hecho] aceptada |
+| [ADR-0003](ADR-0003-docs-astro-starlight.md) | Astro + Starlight para la web/documentación | [hecho] aceptada |
+| [ADR-0004](ADR-0004-decoraciones-ventanas.md) | Estrategia de decoración de ventanas por capas | [hecho] aceptada (en refinamiento) |
+| [ADR-0005](ADR-0005-shell-quickshell-vs-astal.md) | Shell del escritorio: Quickshell vs Astal | [parcial] pendiente — bake-off en Fase 2 |
 
 Plantilla: contexto → opciones consideradas → decisión → consecuencias.

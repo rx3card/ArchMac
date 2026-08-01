@@ -108,7 +108,7 @@ Ultraligero y por teclado, pero **estéticamente opuesto a macOS**: sin animacio
 blur/redondeo nativos (dependerías de `picom`, con resultados limitados), sin ventanas flotantes
 estilo Mac, sin dock ni genie.
 
-| | dwm (X11) | **Hyprland (Wayland)** ✅ |
+| | dwm (X11) | **Hyprland (Wayland)** [hecho] |
 |---|---|---|
 | Animaciones | No (picom limitado) | **Nativas y fluidas** |
 | Blur / esquinas redondeadas | Hack con picom | **Nativo** |
@@ -196,18 +196,18 @@ componente a componente lo que ya diseñaste en la simulación (barra → dock �
 
 ```bash
 # 1) VM con Arch (o equipo de pruebas)
-#    instala Arch con: archinstall   (perfil mínimo)
+# instala Arch con: archinstall   (perfil mínimo)
 
 # 2) Hyprland + utilidades base
 sudo pacman -S hyprland kitty wofi network-manager-applet pipewire wireplumber
 
 # 3) Arranca Hyprland y edita su config
 Hyprland
-#    ~/.config/hypr/hyprland.conf  → animaciones, rounding, blur, gaps (ver dotfiles/)
+# ~/.config/hypr/hyprland.conf  → animaciones, rounding, blur, gaps (ver dotfiles/)
 
 # 4) Shell con AGS
 yay -S aylur-ags-git && ags init && ags run
-#    empieza por la barra superior, luego el dock
+# empieza por la barra superior, luego el dock
 
 # 5) Daily-drive 1–2 semanas, pule la fricción
 # 6) Cuando convenza → archiso (ISO) → instalador → paquetes

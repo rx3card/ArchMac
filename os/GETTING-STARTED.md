@@ -14,8 +14,8 @@ La VM con entorno gráfico es donde se desarrolla y se siente la experiencia rea
    - Tipo: Linux / Arch Linux (64-bit)
    - **RAM: 4096 MB** (el objetivo de ArchMac es correr bien en 4 GB — así medimos de verdad)
    - CPU: 4 núcleos · Disco: 40 GB VDI
-   - Sistema → **Habilitar EFI** ✔ (probamos el arranque UEFI real)
-   - Pantalla → Controlador **VMSVGA** + **Aceleración 3D DESACTIVADA** ❌ + 128 MB de vídeo
+   - Sistema → **Habilitar EFI** OK (probamos el arranque UEFI real)
+   - Pantalla → Controlador **VMSVGA** + **Aceleración 3D DESACTIVADA** [no] + 128 MB de vídeo
      (con 3D activada, VirtualBox rompe el renderizado de Hyprland: pantalla negra con
      solo el cursor. Sin 3D usa renderizado por software — correcto para desarrollar)
 4. Arranca la ISO y ejecuta `archinstall` (perfil mínimo, sin entorno de escritorio).
@@ -49,6 +49,30 @@ La VM con entorno gráfico es donde se desarrolla y se siente la experiencia rea
   arranca directo al escritorio live (usuario `archmac`, autologin).
 - **QEMU (opcional):** `winget install SoftwareFreedomConservancy.QEMU` y luego
   `powershell -File os\scripts\test-iso.ps1`.
+
+## Llevarse la VM a otro PC (sin reinstalar Arch)
+
+La VM ya instalada se puede mover tal cual: no hay que repetir `archinstall`.
+
+**Opción 1 — Exportar la VM completa (recomendada).**
+Con la VM **apagada**: VirtualBox → *Archivo* → *Exportar servicio virtualizado* → elegir la
+VM → formato **OVF 2.0** → guardar como `archmac-dev.ova` (unos 6–12 GB).
+En el PC nuevo: instalar VirtualBox → *Archivo* → *Importar servicio virtualizado* → elegir el
+`.ova`. Arranca exactamente como se dejó, con todo instalado.
+
+**Opción 2 — Copiar solo el disco.**
+El disco virtual es un archivo `.vdi` en
+`C:\Users\<usuario>\VirtualBox VMs\<nombre-VM>\`. Copiarlo al PC nuevo y crear allí una VM
+nueva eligiendo *«Usar un archivo de disco duro virtual existente»* apuntando a ese `.vdi`.
+Recordar los ajustes: EFI activado, VMSVGA, **3D desactivada**, 4 GB de RAM.
+
+**Opción 3 — Instantáneas (para experimentar sin miedo).**
+Antes de un cambio arriesgado: VirtualBox → *Máquina* → *Tomar instantánea*. Si algo se rompe,
+se restaura en segundos. Útil antes de tocar el arranque o el sistema de archivos.
+
+> Aun así, la VM **no es imprescindible**: `os/scripts/setup-desktop.sh` reconstruye el
+> escritorio completo sobre cualquier Arch limpio. Exportar la VM solo ahorra el rato de
+> instalar Arch de nuevo.
 
 ## Flujo de trabajo resumido
 

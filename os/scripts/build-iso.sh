@@ -3,7 +3,7 @@
 # ArchMac — Ensambla el perfil archiso y construye la ISO.
 #
 # Se ejecuta DENTRO de Arch Linux (WSL2, VM o equipo real) como root:
-#   sudo bash os/scripts/build-iso.sh
+# sudo bash os/scripts/build-iso.sh
 #
 # Estrategia: copiar el perfil oficial `releng` como base y aplicar
 # encima nuestras diferencias (profiledef, paquetes extra, airootfs,

@@ -6,9 +6,9 @@ qué se convierte cada pieza y en qué orden se construye. «Shell» = el shell 
 
 | Componente en la simulación | Implementación nativa | Fase |
 |---|---|---|
-| Wallpaper | `hyprpaper` (→ gestor propio con selector en Ajustes) | 2 ✅ base |
-| Ventanas: mover/redimensionar/foco | Hyprland (ya configurado en `dotfiles/hypr`) | 2 ✅ base |
-| Maximizar (botón verde, FLIP) | Animación de Hyprland (`fullscreen`) — curva ya afinada | 2 ✅ base |
+| Wallpaper | `hyprpaper` (→ gestor propio con selector en Ajustes) | 2 [hecho] base |
+| Ventanas: mover/redimensionar/foco | Hyprland (ya configurado en `dotfiles/hypr`) | 2 [hecho] base |
+| Maximizar (botón verde, FLIP) | Animación de Hyprland (`fullscreen`) — curva ya afinada | 2 [hecho] base |
 | **Minimizar con genie** | Aproximación: workspace especial · Fiel: **plugin de Hyprland (C++)** con deformación de malla — la matemática ya está en `web/simulation/src/helpers/genie.ts` | 2 aprox · 5 fiel |
 | Semáforo (cerrar/min/max) en TODAS las apps | Estrategia por capas del [ADR-0004](../docs/decisions/ADR-0004-decoraciones-ventanas.md): tema GTK + override libadwaita + Qt SSD + hyprbars | 2–3 |
 | Barra superior | Waybar provisional (hecho) → **Shell: barra propia** (menús de app, iconos de estado) | 2 → 3 |

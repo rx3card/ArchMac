@@ -72,7 +72,7 @@ Verificado en VM (VirtualBox, Arch + Hyprland 0.56):
 
 ### Pendiente / en verificación
 - **hyprbars** (semáforo dibujado por el compositor para apps sin cabecera propia, como la
-  terminal): último bloque enviado; el script imprime `hyprbars: activo ✔` o un AVISO rojo.
+  terminal): último bloque enviado; el script imprime `hyprbars: activo OK` o un AVISO rojo.
 - **Firefox** dibuja su propio marco (botones a la derecha) → configurar `browser.tabs.inTitlebar`.
 - **Migración de hyprland.conf a Lua**: obligatoria antes de Hyprland 0.57 (aviso amarillo).
 
@@ -84,7 +84,7 @@ Verificado en VM (VirtualBox, Arch + Hyprland 0.56):
 
 1. VirtualBox (o VM/hardware real) → instalar **Arch** con `archinstall`
    (perfil **Minimal**, systemd-boot, NetworkManager, pipewire, usuario con sudo, paquete `git`).
-   - ⚠️ **VirtualBox: DESACTIVAR la aceleración 3D** (con 3D, Hyprland renderiza en negro con
+   - AVISO: **VirtualBox: DESACTIVAR la aceleración 3D** (con 3D, Hyprland renderiza en negro con
      solo el cursor). Controlador VMSVGA, 128 MB de vídeo.
 2. Dentro del Arch instalado:
    ```bash

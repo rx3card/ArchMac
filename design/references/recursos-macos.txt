@@ -1,4 +1,4 @@
-### 🥇 1. Aqua Screenshot Library
+### 1. 1. Aqua Screenshot Library
 
 La mejor para estudiar la interfaz completa.
 
@@ -17,7 +17,7 @@ La mejor para estudiar la interfaz completa.
 
 ---
 
-### 🥈 2. Apple Human Interface Guidelines
+### 2. 2. Apple Human Interface Guidelines
 
 La mejor para entender cómo debería comportarse cada componente.
 
@@ -35,7 +35,7 @@ La mejor para entender cómo debería comportarse cada componente.
 
 ---
 
-### 🥉 3. El blog de Harshil Shah
+### 3. 3. El blog de Harshil Shah
 
 La mejor para entender animaciones complejas como Genie.
 

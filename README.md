@@ -1,6 +1,6 @@
 # ArchMac
 
-> **🚧 Proyecto en desarrollo activo.** Distribución **Linux basada en Arch** con una
+> **Proyecto en desarrollo activo.** Distribución **Linux basada en Arch** con una
 > experiencia de escritorio **premium inspirada en macOS**, sobre Wayland/Hyprland: la
 > facilidad de uso de Windows/macOS con la potencia y libertad de Linux.
 >
@@ -13,7 +13,7 @@ mantenible.
 
 ---
 
-## 📁 Estructura del monorepo
+## Estructura del monorepo
 
 El proyecto tiene **dos partes** ([ADR-0001](docs/decisions/ADR-0001-monorepo.md)):
 
@@ -39,7 +39,7 @@ ArchMac/
 
 ---
 
-## ✅ Qué se ha realizado hasta el momento
+## Qué se ha realizado hasta el momento
 
 ### El escritorio real (funcionando en VM con Arch + Hyprland)
 
@@ -75,7 +75,7 @@ ArchMac/
   optimización de batería y compatibilidad de hardware.
 - **Design tokens** como fuente única de verdad visual compartida.
 
-## 🔜 En qué se trabaja ahora
+## En qué se trabaja ahora
 
 Indicadores de apps abiertas en el dock · menús que cambian según la app activa · Spotlight y
 Launchpad propios · Centro de Control y notificaciones · construcción de la primera ISO.
@@ -83,7 +83,7 @@ El orden completo está en [os/PORTING.md](os/PORTING.md) y [docs/CONTEXT.md](do
 
 ---
 
-## ▶️ Probar el desarrollo
+## Probar el desarrollo
 
 ```bash
 # Web + documentación (http://localhost:4321)
@@ -98,7 +98,7 @@ Para levantar **el sistema operativo** en una máquina virtual, sigue
 
 ---
 
-## ⚖️ Nota legal
+## Nota legal
 
 El nombre y los **iconos, wallpapers y logotipos de estilo Apple** usados durante el prototipo
 son **provisionales**: se reemplazarán por identidad propia antes de distribuir cualquier ISO.

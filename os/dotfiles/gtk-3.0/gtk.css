@@ -31,7 +31,7 @@ windowcontrols > button > image {
 	color: rgba(0, 0, 0, 0.55);
 }
 
-/* Glifos ✕ − + visibles solo al pasar el cursor por el semáforo (como macOS) */
+/* Glifos  − + visibles solo al pasar el cursor por el semáforo (como macOS) */
 windowcontrols:hover > button > image {
 	opacity: 1;
 }

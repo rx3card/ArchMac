@@ -3,7 +3,7 @@
 # ArchMac — Instala/actualiza el escritorio en un Arch ya instalado.
 # Idempotente: se puede ejecutar las veces que haga falta.
 #
-#   bash os/scripts/setup-desktop.sh
+# bash os/scripts/setup-desktop.sh
 # ============================================================
 set -euo pipefail
 
@@ -54,12 +54,12 @@ nautilus -q 2>/dev/null || true
 
 # --- Verificación visible del tema (para diagnosticar sin adivinar) ---
 if [ -d "$HOME/.themes/WhiteSur-Dark" ]; then
-	msg "Tema WhiteSur GTK: instalado ✔"
+	msg "Tema WhiteSur GTK: instalado OK"
 else
 	printf '\033[1;31m==> AVISO:\033[0m WhiteSur NO se instaló — apps GTK3 usarán el semáforo propio\n'
 fi
 if grep -qi whitesur "$HOME/.config/gtk-4.0/gtk.css" 2>/dev/null; then
-	msg "libadwaita (GTK4): WhiteSur activo ✔"
+	msg "libadwaita (GTK4): WhiteSur activo OK"
 else
 	msg "libadwaita (GTK4): usando el semáforo propio de ArchMac (círculos 13px)"
 fi
@@ -78,7 +78,7 @@ if hyprpm list 2>/dev/null | grep -qi hyprbars; then
 	hyprctl keyword windowrule 'match:class org\.gnome\..*, plugin:hyprbars:nobar on' >/dev/null 2>&1 || true
 	hyprctl keyword windowrule 'match:class firefox, plugin:hyprbars:nobar on' >/dev/null 2>&1 || true
 	hyprctl keyword windowrule 'match:class wofi, plugin:hyprbars:nobar on' >/dev/null 2>&1 || true
-	msg "hyprbars: activo ✔ (la terminal nueva tendrá semáforo)"
+	msg "hyprbars: activo OK (la terminal nueva tendrá semáforo)"
 else
 	printf '\033[1;31m==> AVISO:\033[0m hyprbars no quedó activo — la terminal seguirá sin botones\n'
 fi

@@ -3,7 +3,7 @@
 > Documento explicativo de **requisitos funcionales (RF)** y **no funcionales (RNF)** del
 > prototipo web de ArchMac, cuyo objetivo es replicar la experiencia de macOS.
 >
-> **Leyenda de estado:** ✅ hecho · 🟡 parcial · ⬜ pendiente
+> **Leyenda de estado:** `[hecho]` · `[parcial]` · `[pendiente]`
 > **Prioridad:** P0 (núcleo, imprescindible) · P1 (importante) · P2 (deseable) · P3 (extra)
 >
 > Cada requisito incluye: *qué es*, *por qué importa*, *comportamiento esperado* y
@@ -15,7 +15,7 @@
 
 ## Módulo A — Gestión de ventanas
 
-### RF-A1 · Abrir aplicación — `P0` ✅
+### RF-A1 · Abrir aplicación — `P0` [hecho]
 - **Qué:** lanzar una app crea su ventana en pantalla.
 - **Por qué:** es la acción básica del escritorio.
 - **Comportamiento esperado:** al hacer clic en el dock, el icono **rebota**, la ventana
@@ -23,13 +23,13 @@
 - **Criterios de aceptación:** la ventana se monta, queda enfocada (al frente) y el icono
   muestra el indicador de "abierta".
 
-### RF-A2 · Cerrar ventana — `P0` ✅
+### RF-A2 · Cerrar ventana — `P0` [hecho]
 - **Qué:** botón rojo del semáforo cierra la ventana.
 - **Comportamiento esperado:** la ventana se desvanece/encoge y desaparece; el estado de la
   app pasa a "cerrada".
 - **Criterios de aceptación:** la ventana se desmonta y el indicador del dock se apaga.
 
-### RF-A3 · Minimizar al dock (efecto *genie*) — `P0` 🟡
+### RF-A3 · Minimizar al dock (efecto *genie*) — `P0` [parcial]
 - **Qué:** botón amarillo envía la ventana al dock con animación.
 - **Por qué:** es una de las animaciones más icónicas de macOS.
 - **Comportamiento esperado (objetivo):** la ventana se **deforma como papel/líquido** (efecto
@@ -39,19 +39,19 @@
 - **Criterios de aceptación:** al minimizar, la ventana desaparece hacia el dock; al hacer clic
   en su icono, regresa con la animación inversa.
 
-### RF-A4 · Maximizar / Pantalla completa y restaurar — `P0` ✅
+### RF-A4 · Maximizar / Pantalla completa y restaurar — `P0` [hecho]
 - **Qué:** botón verde lleva la ventana a pantalla completa (bajo la barra) y la restaura.
 - **Comportamiento esperado:** ocupa todo el ancho/alto disponible; al restaurar vuelve a su
   posición y tamaño anteriores.
 - **Criterios de aceptación:** maximizada llena la pantalla (sin desbordes); restaurada coincide
   exactamente con la geometría previa.
 
-### RF-A5 · Mover ventana (arrastrar) — `P0` ✅
+### RF-A5 · Mover ventana (arrastrar) — `P0` [hecho]
 - **Qué:** arrastrar desde la barra de título reposiciona la ventana.
 - **Criterios de aceptación:** la ventana sigue al cursor sin saltos; no se mueve si está
   maximizada.
 
-### RF-A6 · Redimensionar por bordes y esquinas — `P0` ✅
+### RF-A6 · Redimensionar por bordes y esquinas — `P0` [hecho]
 - **Qué:** estirar la ventana desde sus 8 puntos (4 bordes + 4 esquinas).
 - **Comportamiento esperado:** redimensionar desde un borde **derecho/inferior** solo crece;
   desde **izquierdo/superior** crece y desplaza el borde correspondiente, respetando un tamaño
@@ -59,158 +59,158 @@
 - **Criterios de aceptación:** funciona en los 8 sentidos, con cursores correctos, y **sin
   saltos** al arrastrar después de redimensionar.
 
-### RF-A7 · Foco y orden de apilado (z-index) — `P0` ✅
+### RF-A7 · Foco y orden de apilado (z-index) — `P0` [hecho]
 - **Qué:** la ventana sobre la que se hace clic pasa al frente y recibe foco.
 - **Criterios de aceptación:** el semáforo de la ventana activa se ve a color; las inactivas, en
   gris.
 
-### RF-A8 · Símbolos del semáforo al pasar el cursor — `P1` ✅
-- **Qué:** los iconos ✕ − ↗ aparecen solo al pasar el ratón por el semáforo.
+### RF-A8 · Símbolos del semáforo al pasar el cursor — `P1` [hecho]
+- **Qué:** los iconos  − ↗ aparecen solo al pasar el ratón por el semáforo.
 
-### RF-A9 · Doble clic en la barra de título — `P2` ⬜
+### RF-A9 · Doble clic en la barra de título — `P2` [pendiente]
 - **Qué:** doble clic = minimizar o hacer zoom (configurable).
 
-### RF-A10 · *Snapping* / mosaico de ventanas — `P2` ⬜
+### RF-A10 · *Snapping* / mosaico de ventanas — `P2` [pendiente]
 - **Qué:** arrastrar una ventana a un borde la ajusta a media pantalla (o mosaico).
 - **Por qué:** productividad; macOS Sequoia lo incorpora.
 
-### RF-A11 · Reubicar ventanas fuera de pantalla — `P2` ⬜
+### RF-A11 · Reubicar ventanas fuera de pantalla — `P2` [pendiente]
 - **Qué:** si la resolución cambia y una ventana queda fuera, traerla a la vista.
 
 ---
 
 ## Módulo B — Dock
 
-### RF-B1 · Magnificación por proximidad — `P0` ✅
+### RF-B1 · Magnificación por proximidad — `P0` [hecho]
 - **Qué:** los iconos crecen según la cercanía del cursor (curva tipo campana).
 
-### RF-B2 · Rebote al abrir / solicitar atención — `P1` ✅
+### RF-B2 · Rebote al abrir / solicitar atención — `P1` [hecho]
 - **Qué:** el icono rebota al lanzar la app o cuando requiere atención.
 
-### RF-B3 · Indicador de app abierta — `P0` ✅
+### RF-B3 · Indicador de app abierta — `P0` [hecho]
 - **Qué:** punto debajo del icono de las apps en ejecución.
 
-### RF-B4 · Separadores — `P1` ✅
+### RF-B4 · Separadores — `P1` [hecho]
 - **Qué:** divisores entre grupos (apps fijadas / sistema / minimizadas / papelera).
 
-### RF-B5 · Ventanas minimizadas en el dock — `P1` 🟡
+### RF-B5 · Ventanas minimizadas en el dock — `P1` [parcial]
 - **Qué:** la **miniatura** de la ventana minimizada se coloca a la derecha del separador.
 - **Estado:** se restaura al clic, pero falta mostrar miniatura propia.
 
-### RF-B6 · Menú contextual del icono — `P2` ⬜
+### RF-B6 · Menú contextual del icono — `P2` [pendiente]
 - **Qué:** clic derecho → Salir, Opciones, Mantener en el Dock, Mostrar en Finder…
 
-### RF-B7 · Auto-ocultar y posición — `P2` ⬜
+### RF-B7 · Auto-ocultar y posición — `P2` [pendiente]
 - **Qué:** ocultar el dock automáticamente; colocarlo abajo/izquierda/derecha.
 
-### RF-B8 · Papelera — `P3` ⬜
+### RF-B8 · Papelera — `P3` [pendiente]
 - **Qué:** icono de papelera al final del dock (vaciar / arrastrar para eliminar).
 
 ---
 
 ## Módulo C — Barra de menús superior
 
-### RF-C1 · Menú Apple () — `P1` 🟡
+### RF-C1 · Menú Apple () — `P1` [parcial]
 - **Qué:** menú con Acerca de, Ajustes, App Store, Reposo, Reiniciar, Apagar, Cerrar sesión,
   Bloquear pantalla.
 - **Estado:** existe el logo; faltan las acciones reales.
 
-### RF-C2 · Menús de la app activa — `P1` 🟡
+### RF-C2 · Menús de la app activa — `P1` [parcial]
 - **Qué:** Archivo, Edición, Ver, Ventana, Ayuda — **cambian según la app con foco**.
 - **Estado:** existen estáticos; falta que dependan de la app activa.
 
-### RF-C3 · Iconos de estado — `P1` 🟡
+### RF-C3 · Iconos de estado — `P1` [parcial]
 - **Qué:** Wi-Fi, Bluetooth, batería, volumen, hora, Spotlight, Centro de Control.
 - **Estado:** hay un toggle; faltan iconos reales con su estado.
 
-### RF-C4 · Reloj y fecha — `P0` ✅
+### RF-C4 · Reloj y fecha — `P0` [hecho]
 - **Qué:** hora y fecha en vivo a la derecha.
 
 ---
 
 ## Módulo D — Centro de Control y Notificaciones
 
-### RF-D1 · Centro de Control — `P1` ⬜
+### RF-D1 · Centro de Control — `P1` [pendiente]
 - **Qué:** panel desplegable con brillo, volumen, Wi-Fi, Bluetooth, AirDrop, modo concentración
   y controles de música.
 - **Criterios de aceptación:** se abre desde su icono, los controles modifican el estado y la
   UI reacciona (p. ej. volumen ↔ icono de la barra).
 
-### RF-D2 · Centro de Notificaciones — `P1` ⬜
+### RF-D2 · Centro de Notificaciones — `P1` [pendiente]
 - **Qué:** panel lateral con notificaciones y **widgets** (reloj, calendario, clima).
 
-### RF-D3 · Notificaciones emergentes (toasts) — `P2` ⬜
+### RF-D3 · Notificaciones emergentes (toasts) — `P2` [pendiente]
 - **Qué:** avisos que entran desde la esquina superior derecha y se apilan.
 
 ---
 
 ## Módulo E — Navegación del sistema
 
-### RF-E1 · Spotlight — `P1` 🟡 ✅(apps)
+### RF-E1 · Spotlight — `P1` [parcial] [hecho](apps)
 - **Qué:** búsqueda universal con **⌘/Ctrl+Espacio** (apps, archivos, cálculos, conversiones, web).
 - **Comportamiento esperado:** panel central, navegación con flechas, Enter abre el resultado.
-- **Estado:** ✅ búsqueda y apertura de **apps** (flechas + Enter + clic). Falta: archivos,
+- **Estado:** [hecho] búsqueda y apertura de **apps** (flechas + Enter + clic). Falta: archivos,
   cálculos, conversiones y web (esos requieren datos/backend — ver Parte III).
 
-### RF-E2 · Mission Control — `P1` ⬜
+### RF-E2 · Mission Control — `P1` [pendiente]
 - **Qué:** **⌃↑** o 3 dedos ↑ → vista de todas las ventanas + barra de Spaces arriba.
 
-### RF-E3 · App Exposé — `P2` ⬜
+### RF-E3 · App Exposé — `P2` [pendiente]
 - **Qué:** **⌃↓** o 3 dedos ↓ → solo las ventanas de la app activa.
 
-### RF-E4 · Launchpad — `P1` ✅
+### RF-E4 · Launchpad — `P1` [hecho]
 - **Qué:** cuadrícula de todas las apps con búsqueda; fondo desenfocado.
-- **Estado:** ✅ rejilla de apps + búsqueda + fondo blur. Se abre desde el dock, con **F4** o
+- **Estado:** [hecho] rejilla de apps + búsqueda + fondo blur. Se abre desde el dock, con **F4** o
   (simulando 4 dedos) su botón. Falta: paginación y carpetas (P3).
 
-### RF-E5 · Cambiador de apps (⌘Tab) — `P1` ✅
+### RF-E5 · Cambiador de apps (⌘Tab) — `P1` [hecho]
 - **Qué:** overlay para recorrer las apps abiertas manteniendo ⌘/Ctrl.
-- **Estado:** ✅ ⌘/Ctrl+Tab (Shift = inverso) muestra el overlay y cicla; confirma al soltar la
+- **Estado:** [hecho] ⌘/Ctrl+Tab (Shift = inverso) muestra el overlay y cicla; confirma al soltar la
   tecla o tras una pausa. También se activa con **swipe horizontal** sobre el escritorio (simula
   el gesto de 3 dedos ↔ entre ventanas).
 
-### RF-E6 · Escritorios (Spaces) — `P2` ⬜
+### RF-E6 · Escritorios (Spaces) — `P2` [pendiente]
 - **Qué:** múltiples escritorios virtuales; navegación con 3/4 dedos ↔ o ⌃←/→.
 
-### RF-E7 · Stage Manager — `P3` ⬜
+### RF-E7 · Stage Manager — `P3` [pendiente]
 - **Qué:** agrupar ventanas a un lado para enfocarse en una.
 
-### RF-E8 · Hot Corners — `P3` ⬜
+### RF-E8 · Hot Corners — `P3` [pendiente]
 - **Qué:** acción al llevar el cursor a una esquina (p. ej. Mission Control).
 
 ---
 
 ## Módulo F — Escritorio
 
-### RF-F1 · Wallpaper — `P0` ✅
+### RF-F1 · Wallpaper — `P0` [hecho]
 - **Qué:** fondo de pantalla (Ventura por defecto).
 
-### RF-F2 · Selector de wallpaper — `P1` 🟡
+### RF-F2 · Selector de wallpaper — `P1` [parcial]
 - **Qué:** elegir entre varios fondos (el repo trae muchos); aplicar al instante.
 
-### RF-F3 · Menú contextual del escritorio — `P1` ⬜
+### RF-F3 · Menú contextual del escritorio — `P1` [pendiente]
 - **Qué:** clic derecho → Cambiar fondo, Ordenar, Mostrar opciones de vista…
 
-### RF-F4 · Iconos/archivos en el escritorio — `P3` ⬜
+### RF-F4 · Iconos/archivos en el escritorio — `P3` [pendiente]
 - **Qué:** archivos y carpetas colocables en el escritorio.
 
-### RF-F5 · Widgets — `P3` ⬜
+### RF-F5 · Widgets — `P3` [pendiente]
 - **Qué:** widgets en el escritorio (estilo Sonoma).
 
 ---
 
 ## Módulo G — Aplicaciones
 
-### RF-G1 · Calculadora — `P1` ✅
-### RF-G2 · Calendario — `P1` ✅
-### RF-G3 · Acerca de ArchMac — `P1` ✅
-### RF-G4 · Finder navegable — `P2` ⬜
+### RF-G1 · Calculadora — `P1` [hecho]
+### RF-G2 · Calendario — `P1` [hecho]
+### RF-G3 · Acerca de ArchMac — `P1` [hecho]
+### RF-G4 · Finder navegable — `P2` [pendiente]
 - **Qué:** explorador con barra lateral, vistas (iconos/lista/columnas), navegación de carpetas.
-### RF-G5 · Terminal simulada — `P2` ⬜
+### RF-G5 · Terminal simulada — `P2` [pendiente]
 - **Qué:** terminal con comandos básicos de demostración.
-### RF-G6 · Ajustes del sistema — `P1` ⬜
+### RF-G6 · Ajustes del sistema — `P1` [pendiente]
 - **Qué:** apariencia (claro/oscuro/auto), acento, fondo, dock, idioma.
-### RF-G7 · Otras apps (Safari, Mail, Mensajes, Mapas, Notas, Música, Terminal, Ajustes…) — `P2–P3` 🟡
+### RF-G7 · Otras apps (Safari, Mail, Mensajes, Mapas, Notas, Música, Terminal, Ajustes…) — `P2–P3` [parcial]
 - **Estado:** todas existen en el dock/Launchpad/Spotlight con **ventana placeholder** ("en
   construcción") y su icono real. Falta darles contenido real (ver Parte III para los límites).
 
@@ -218,40 +218,40 @@
 
 ## Módulo H — Sesión y arranque
 
-### RF-H1 · Pantalla de arranque (boot) — `P1` ✅
+### RF-H1 · Pantalla de arranque (boot) — `P1` [hecho]
 - **Qué:** fondo negro, logo centrado, barra de progreso.
 
-### RF-H2 · Pantalla de bloqueo / login — `P1` ⬜
+### RF-H2 · Pantalla de bloqueo / login — `P1` [pendiente]
 - **Qué:** fondo, avatar de usuario, campo de contraseña, hora grande.
 
-### RF-H3 · Apagar / Reiniciar / Reposo / Cerrar sesión — `P1` ⬜
+### RF-H3 · Apagar / Reiniciar / Reposo / Cerrar sesión — `P1` [pendiente]
 - **Qué:** acciones del menú  con sus transiciones (pantalla a negro, etc.).
 
-### RF-H4 · Sonidos del sistema — `P3` ⬜
+### RF-H4 · Sonidos del sistema — `P3` [pendiente]
 - **Qué:** sonido de arranque y alertas.
 
 ---
 
 ## Módulo I — Interacción (teclado, gestos, etc.)
 
-### RF-I1 · Atajos de teclado globales — `P2` 🟡
+### RF-I1 · Atajos de teclado globales — `P2` [parcial]
 - **Qué:** ⌘Q (salir), ⌘W (cerrar), ⌘M (minimizar), ⌘Espacio (Spotlight), ⌘Tab (apps),
   ⌃↑ (Mission Control), F4 (Launchpad), etc.
-- **Estado:** ✅ ⌘/Ctrl+Espacio, ⌘/Ctrl+Tab, F4, Escape. Faltan ⌘Q/W/M y Mission Control.
+- **Estado:** [hecho] ⌘/Ctrl+Espacio, ⌘/Ctrl+Tab, F4, Escape. Faltan ⌘Q/W/M y Mission Control.
 
-### RF-I2 · Emulación de gestos del trackpad — `P2` 🟡
+### RF-I2 · Emulación de gestos del trackpad — `P2` [parcial]
 - **Qué:** mapear gestos a eventos web. **Limitación real:** los navegadores **no reciben** los
   gestos de 3/4 dedos (los intercepta el SO), así que se **simulan** con equivalentes.
-- **Estado:** ✅ swipe horizontal sobre el escritorio = cambiar de ventana (simula 3 dedos ↔);
+- **Estado:** [hecho] swipe horizontal sobre el escritorio = cambiar de ventana (simula 3 dedos ↔);
   Launchpad por botón/F4 (simula 4 dedos). Mission Control pendiente.
 
-### RF-I3 · Menús contextuales (clic derecho) — `P2` ⬜
+### RF-I3 · Menús contextuales (clic derecho) — `P2` [pendiente]
 - **Qué:** menús contextuales coherentes en escritorio, dock y apps.
 
-### RF-I4 · Arrastrar y soltar — `P3` ⬜
+### RF-I4 · Arrastrar y soltar — `P3` [pendiente]
 - **Qué:** mover archivos entre ventanas/escritorio.
 
-### RF-I5 · Persistencia de sesión — `P2` ⬜
+### RF-I5 · Persistencia de sesión — `P2` [pendiente]
 - **Qué:** recordar apps abiertas, geometría de ventanas, wallpaper, tema y acento
   (localStorage) entre recargas.
 
@@ -259,57 +259,57 @@
 
 # PARTE II — REQUISITOS NO FUNCIONALES (cómo debe ser el sistema)
 
-### RNF-1 · Rendimiento — `P0` 🟡
+### RNF-1 · Rendimiento — `P0` [parcial]
 - **Qué:** animaciones a **60 fps**, arranque rápido, consumo de memoria contenido.
 - **Cómo:** usar `transform`/`opacity` (compositor GPU), evitar *layout thrashing*, carga
   perezosa de apps.
 - **Aceptación:** sin *jank* perceptible al arrastrar/redimensionar/minimizar.
 
-### RNF-2 · Accesibilidad (a11y) — `P1` 🟡
+### RNF-2 · Accesibilidad (a11y) — `P1` [parcial]
 - **Qué:** roles ARIA, navegación por teclado, foco visible, contraste suficiente, compatibilidad
   con lectores de pantalla.
 - **Incluye:** respetar **`prefers-reduced-motion`** (desactivar/atenuar animaciones).
 
-### RNF-3 · Diseño responsivo — `P1` ⬜
+### RNF-3 · Diseño responsivo — `P1` [pendiente]
 - **Qué:** adaptarse a distintas resoluciones; recolocar ventanas y dock; usable en pantallas
   pequeñas.
 
-### RNF-4 · Theming coherente — `P0` 🟡
+### RNF-4 · Theming coherente — `P0` [parcial]
 - **Qué:** claro/oscuro + color de acento, todo desde **tokens/variables CSS** (una sola fuente
   de verdad). Cambiar el tema actualiza toda la UI sin inconsistencias.
 
-### RNF-5 · Internacionalización (i18n) — `P2` 🟡
+### RNF-5 · Internacionalización (i18n) — `P2` [parcial]
 - **Qué:** español por defecto, preparado para inglés; textos centralizados, formatos de
   fecha/hora localizados.
 
-### RNF-6 · PWA / offline — `P2` 🟡
+### RNF-6 · PWA / offline — `P2` [parcial]
 - **Qué:** instalable y con cacheo de assets (el repo base ya incluye `vite-plugin-pwa`).
 
-### RNF-7 · Mantenibilidad y arquitectura — `P0` ✅
+### RNF-7 · Mantenibilidad y arquitectura — `P0` [hecho]
 - **Qué:** componentes pequeños y reutilizables, **estado centralizado** (`src/state`),
   configuración de apps declarativa, sin lógica duplicada.
 - **Aceptación:** añadir una app nueva = crear su config + componente, sin tocar el núcleo.
 
-### RNF-8 · Compatibilidad de navegadores — `P1` 🟡
+### RNF-8 · Compatibilidad de navegadores — `P1` [parcial]
 - **Qué:** Chrome, Edge, Firefox y Safari modernos.
 
-### RNF-9 · Calidad de tipos y build — `P0` ✅
+### RNF-9 · Calidad de tipos y build — `P0` [hecho]
 - **Qué:** TypeScript estricto; `pnpm check` sin errores ni warnings antes de cada avance.
 
-### RNF-10 · Fidelidad visual y de animación — `P1` 🟡
+### RNF-10 · Fidelidad visual y de animación — `P1` [parcial]
 - **Qué:** las animaciones deben **sentirse como macOS** (duraciones y curvas correctas; ver
   tabla en el [README](README.md)). El *genie* fiel es objetivo explícito.
 
-### RNF-11 · Seguridad — `P2` ⬜
+### RNF-11 · Seguridad — `P2` [pendiente]
 - **Qué:** sanear contenido en apps que muestren HTML/iframes; sin *secrets* en el cliente.
 
-### RNF-12 · Testeo — `P2` ⬜
+### RNF-12 · Testeo — `P2` [pendiente]
 - **Qué:** pruebas de los comportamientos críticos (gestión de ventanas, estado).
 
-### RNF-13 · Documentación — `P1` ✅
+### RNF-13 · Documentación — `P1` [hecho]
 - **Qué:** README con la investigación de macOS, este documento de requisitos y `PLAN.md`.
 
-### RNF-14 · Legal / propiedad intelectual — `P0` 🟡
+### RNF-14 · Legal / propiedad intelectual — `P0` [parcial]
 - **Qué:** los **iconos, wallpapers y el logo de Apple son PROVISIONALES** (solo para el
   prototipo). **Deben sustituirse por identidad propia** de ArchMac antes de distribuir cualquier
   ISO, para evitar problemas de marca/copyright.
@@ -362,7 +362,7 @@
 
 | Prioridad | Foco |
 |---|---|
-| **P0** | Ventanas (✅ casi completo), dock básico (✅), reloj (✅), rendimiento, theming, build, legal |
+| **P0** | Ventanas ([hecho] casi completo), dock básico ([hecho]), reloj ([hecho]), rendimiento, theming, build, legal |
 | **P1** | Centro de Control, Spotlight, Mission Control, Launchpad, ⌘Tab, barra de menús real, Ajustes, login/apagar, *genie* fiel |
 | **P2** | Atajos de teclado, gestos, persistencia, Finder/Terminal, snapping, notificaciones |
 | **P3** | Stage Manager, Hot Corners, widgets, papelera, sonidos, apps extra |
