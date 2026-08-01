@@ -20,7 +20,7 @@ cp -r "$REPO/os/dotfiles/." "$HOME/.config/"
 
 msg "Instalando wallpaper por defecto…"
 mkdir -p "$HOME/.config/wallpaper"
-cp "$REPO/web/simulation/src/assets/wallpapers/ventura-3.webp" "$HOME/.config/wallpaper/default.webp"
+cp "$REPO/os/branding/wallpapers/ventura-3.jpg" "$HOME/.config/wallpaper/default.jpg"
 
 # Si Hyprland está corriendo, recargar config y reiniciar wallpaper/barra
 if command -v hyprctl >/dev/null 2>&1 && [ -n "${HYPRLAND_INSTANCE_SIGNATURE:-}" ]; then

@@ -39,9 +39,10 @@ vulkan-intel
 intel-media-driver
 libva-mesa-driver
 
-# --- Tipografías (Inter = UI, JetBrains Mono = código) ---
+# --- Tipografías (Inter = UI, JetBrains Mono = código, Nerd Symbols = iconos de la barra) ---
 inter-font
 ttf-jetbrains-mono
+ttf-nerd-fonts-symbols
 noto-fonts
 noto-fonts-emoji
 noto-fonts-cjk
