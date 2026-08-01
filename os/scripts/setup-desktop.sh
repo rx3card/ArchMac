@@ -65,11 +65,23 @@ else
 fi
 
 msg "Instalando hyprbars (semáforo para apps sin barra propia, p. ej. la terminal)…"
-sudo pacman -S --needed --noconfirm cmake meson cpio pkgconf gcc git
-hyprpm update || true
+sudo pacman -S --needed --noconfirm base-devel cmake meson ninja cpio pkgconf gcc git
+# Salida VISIBLE: si algo falla aquí, queremos leerlo
+hyprpm update -v || printf '\033[1;31m==> AVISO:\033[0m hyprpm update falló (mira los errores de arriba)\n'
 hyprpm add https://github.com/hyprwm/hyprland-plugins 2>/dev/null || true
 hyprpm enable hyprbars || true
 hyprpm reload -n || true
+
+# Reglas "nobar" en caliente (solo válidas con el plugin ya cargado):
+# las apps con cabecera propia (GTK/Firefox/wofi) no llevan barra del compositor.
+if hyprpm list 2>/dev/null | grep -qi hyprbars; then
+	hyprctl keyword windowrule 'match:class org\.gnome\..*, plugin:hyprbars:nobar on' >/dev/null 2>&1 || true
+	hyprctl keyword windowrule 'match:class firefox, plugin:hyprbars:nobar on' >/dev/null 2>&1 || true
+	hyprctl keyword windowrule 'match:class wofi, plugin:hyprbars:nobar on' >/dev/null 2>&1 || true
+	msg "hyprbars: activo ✔ (la terminal nueva tendrá semáforo)"
+else
+	printf '\033[1;31m==> AVISO:\033[0m hyprbars no quedó activo — la terminal seguirá sin botones\n'
+fi
 
 msg "Botones de ventana a la izquierda (estilo macOS)…"
 if command -v gsettings >/dev/null 2>&1; then
