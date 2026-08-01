@@ -12,7 +12,7 @@ qt6-wayland
 kitty
 wofi
 waybar
-hyprpaper
+swaybg
 brightnessctl
 playerctl
 pamixer

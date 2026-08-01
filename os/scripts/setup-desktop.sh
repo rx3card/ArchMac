@@ -25,10 +25,11 @@ cp "$REPO/os/branding/wallpapers/ventura-3.jpg" "$HOME/.config/wallpaper/default
 # Si Hyprland está corriendo, recargar config y reiniciar wallpaper/barra
 if command -v hyprctl >/dev/null 2>&1 && [ -n "${HYPRLAND_INSTANCE_SIGNATURE:-}" ]; then
 	msg "Hyprland activo: recargando…"
+	pkill swaybg 2>/dev/null || true
 	pkill hyprpaper 2>/dev/null || true
 	pkill waybar 2>/dev/null || true
 	hyprctl reload >/dev/null
-	hyprctl dispatch exec hyprpaper >/dev/null
+	hyprctl dispatch exec "swaybg -i $HOME/.config/wallpaper/default.jpg -m fill" >/dev/null
 	hyprctl dispatch exec waybar >/dev/null
 fi
 

@@ -15,7 +15,9 @@ La VM con entorno gráfico es donde se desarrolla y se siente la experiencia rea
    - **RAM: 4096 MB** (el objetivo de ArchMac es correr bien en 4 GB — así medimos de verdad)
    - CPU: 4 núcleos · Disco: 40 GB VDI
    - Sistema → **Habilitar EFI** ✔ (probamos el arranque UEFI real)
-   - Pantalla → Controlador **VMSVGA** + **Aceleración 3D** ✔ + 128 MB de vídeo
+   - Pantalla → Controlador **VMSVGA** + **Aceleración 3D DESACTIVADA** ❌ + 128 MB de vídeo
+     (con 3D activada, VirtualBox rompe el renderizado de Hyprland: pantalla negra con
+     solo el cursor. Sin 3D usa renderizado por software — correcto para desarrollar)
 4. Arranca la ISO y ejecuta `archinstall` (perfil mínimo, sin entorno de escritorio).
 5. Dentro del Arch instalado:
 
