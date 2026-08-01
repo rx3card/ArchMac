@@ -29,6 +29,13 @@ cp -r "$REPO/os/shell/quickshell" "$HOME/.config/quickshell/archmac"
 # Iconos de la simulación (provisionales) para el dock
 cp -r "$REPO/web/simulation/public/app-icons" "$HOME/.config/quickshell/archmac/icons"
 
+msg "Botones de ventana a la izquierda (estilo macOS)…"
+if command -v gsettings >/dev/null 2>&1; then
+	gsettings set org.gnome.desktop.wm.preferences button-layout 'close,minimize,maximize:' 2>/dev/null || true
+	# libadwaita también respeta el esquema en dconf; tema oscuro coherente:
+	gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark' 2>/dev/null || true
+fi
+
 msg "Configurando autoarranque del escritorio (login en tty1)…"
 if ! grep -q ARCHMAC_AUTOSTART "$HOME/.bash_profile" 2>/dev/null; then
 	cat >> "$HOME/.bash_profile" <<'EOF'

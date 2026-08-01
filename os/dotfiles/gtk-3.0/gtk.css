@@ -1,0 +1,46 @@
+/* ============================================================
+   ArchMac — Semáforo macOS en apps GTK4/libadwaita (capa 1-2 del ADR-0004)
+   Redibuja los botones cerrar/minimizar/maximizar de TODAS las
+   apps GTK sin modificarlas. Los glifos aparecen solo al hover.
+   ============================================================ */
+
+windowcontrols {
+	margin-left: 8px;
+	margin-right: 8px;
+}
+
+windowcontrols button {
+	min-width: 13px;
+	min-height: 13px;
+	padding: 0;
+	margin: 0 4px;
+	border-radius: 9999px;
+	border: none;
+	background-image: none;
+	box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+}
+
+/* Glifo oculto hasta pasar el cursor, como macOS */
+windowcontrols button image {
+	opacity: 0;
+	-gtk-icon-size: 9px;
+	color: rgba(0, 0, 0, 0.55);
+}
+windowcontrols:hover button image {
+	opacity: 1;
+}
+
+windowcontrols button.close    { background-color: #ff5f57; }
+windowcontrols button.minimize { background-color: #febc2e; }
+windowcontrols button.maximize { background-color: #28c840; }
+
+windowcontrols button.close:active    { background-color: #e0443e; }
+windowcontrols button.minimize:active { background-color: #e0a52a; }
+windowcontrols button.maximize:active { background-color: #23a938; }
+
+/* Ventana sin foco: botones grises, como macOS */
+windowcontrols button.close:backdrop,
+windowcontrols button.minimize:backdrop,
+windowcontrols button.maximize:backdrop {
+	background-color: #57575c;
+}
