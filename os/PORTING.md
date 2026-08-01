@@ -26,6 +26,14 @@ qué se convierte cada pieza y en qué orden se construye. «Shell» = el shell 
 | App de Ajustes | Aplicación propia (mismo stack que el shell) | 4 |
 | Gestos 3/4 dedos | Hyprland (workspace swipe hecho) + gestos del shell | 2–3 |
 
+## Nota técnica pendiente: migración a config Lua de Hyprland
+
+Desde **Hyprland 0.55** el formato de configuración clásico (hyprlang) está **deprecado en
+favor de Lua** (`hl.gesture({...})`, etc.). Nuestro `dotfiles/hypr/hyprland.conf` usa la
+sintaxis clásica validada contra 0.51–0.54, que sigue funcionando por compatibilidad. Antes de
+la ISO estable hay que migrar a Lua — además nos conviene: la config Lua permite lógica
+(leer `design/tokens/tokens.json` directamente, generar reglas dinámicas).
+
 ## Orden de trabajo (Fase 2, concreto)
 
 1. **Daily-drive base** ← estamos aquí: VM con Hyprland + dotfiles de este repo. Sentir y pulir.
