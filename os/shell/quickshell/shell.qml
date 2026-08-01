@@ -3,5 +3,6 @@
 import Quickshell
 
 ShellRoot {
+	TopBar {}
 	Dock {}
 }

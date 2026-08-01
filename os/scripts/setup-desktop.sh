@@ -56,7 +56,6 @@ if command -v hyprctl >/dev/null 2>&1 && [ -n "${HYPRLAND_INSTANCE_SIGNATURE:-}"
 	pkill -f 'quickshell -c archmac' 2>/dev/null || true
 	hyprctl reload >/dev/null
 	hyprctl dispatch exec "swaybg -i $HOME/.config/wallpaper/default.jpg -m fill" >/dev/null
-	hyprctl dispatch exec waybar >/dev/null
 	hyprctl dispatch exec "sh -c 'command -v qs >/dev/null && exec qs -c archmac || exec quickshell -c archmac'" >/dev/null
 fi
 
