@@ -1,0 +1,51 @@
+// ArchMac — Barra superior PROVISIONAL (waybar).
+// Es un sustituto temporal: la barra definitiva será parte del shell propio (ADR-0005).
+// Sirve para que el live/daily-drive sea usable mientras tanto.
+{
+	"layer": "top",
+	"position": "top",
+	"height": 30,
+	"spacing": 8,
+
+	"modules-left": ["custom/logo", "hyprland/window"],
+	"modules-center": ["clock"],
+	"modules-right": ["tray", "pulseaudio", "network", "battery", "hyprland/language"],
+
+	"custom/logo": {
+		"format": "",
+		"tooltip": false,
+		"on-click": "wofi --show drun"
+	},
+	"hyprland/window": {
+		"max-length": 40,
+		"separate-outputs": true
+	},
+	"clock": {
+		"format": "{:%a %d %b  %H:%M}",
+		"tooltip-format": "<tt>{calendar}</tt>"
+	},
+	"pulseaudio": {
+		"format": "{icon} {volume}%",
+		"format-muted": "󰝟",
+		"format-icons": { "default": ["󰕿", "󰖀", "󰕾"] },
+		"on-click": "pamixer -t"
+	},
+	"network": {
+		"format-wifi": "󰤨",
+		"format-ethernet": "󰈀",
+		"format-disconnected": "󰤭",
+		"tooltip-format": "{essid} ({signalStrength}%)"
+	},
+	"battery": {
+		"format": "{icon} {capacity}%",
+		"format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰁹"],
+		"states": { "warning": 25, "critical": 10 }
+	},
+	"hyprland/language": {
+		"format": "{short}"
+	},
+	"tray": {
+		"icon-size": 16,
+		"spacing": 10
+	}
+}

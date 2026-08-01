@@ -1,91 +1,88 @@
 # ArchMac
 
-> Distribución **Linux basada en Archlinux** con una experiencia de escritorio **inspirada en
-> macOS**, sobre Wayland/Hyprland. Rediseñada desde cero para velocidad, eficiencia, simplicidad
-> y control, con identidad visual propia, instalador gráfico.
+> Distribución **Linux basada en Arch** con una experiencia de escritorio **premium inspirada
+> en macOS**, sobre Wayland/Hyprland. Rediseñada para velocidad, eficiencia, simplicidad y
+> control, con identidad visual propia e instalador gráfico.
+>
+> ⚠️ **Nombre provisional:** «ArchMac» tiene riesgo de marca (política de marcas de Arch Linux
+> y marca «Mac» de Apple). El nombre definitivo se decide en la Fase 0 de branding, antes de
+> cualquier publicación. Ver [ADR-0002](docs/decisions/ADR-0002-base-arch-linux.md).
 
-ArchMac o este proyecto en general se desarrolla en **dos partes**:
+## 📁 Estructura del monorepo
 
-1. **Sitio Web & Simulación** (este repositorio): Un prototipo web que simula la/el distribución/escritorio completo
-   (dock, ventanas, animaciones, apps, arranque, instalador). Sirve para validar el diseño y
-   como *showcase* público. Aquí también estara  la **web del proyecto + documentación** (unificadas) como la visualizacion principal.
-2. **Software / Distro** (repositorio aparte): El sistema operativo. Perfil de `archiso`,
-   compositor Hyprland, shell nativo, paquetes, branding e instalador. Ver [SOFTWARE.md](SOFTWARE.md).
-
----
-
-## 📁 Estructura del proyecto
+Todo el proyecto vive en este repositorio, en **dos partes principales**
+([ADR-0001](docs/decisions/ADR-0001-monorepo.md)):
 
 ```
-ArchMac/                 ← raíz = SITIO WEB del proyecto (Svelte 5 + Vite)
-├── index.html           ← entrada de Vite
-├── src/
-│   ├── main.ts
-│   ├── App.svelte       ← la landing (hero, características, capturas, docs…)
-│   └── style.css        ← diseño del sitio (vidrio macOS + azul Arch)
-├── public/
-│   ├── favicon.svg
-│   └── screenshots/     ← capturas reales de la simulación
+ArchMac/
+├── web/                 ══ PARTE 1 · La web oficial ══
+│   ├── site/            Web + documentación (Astro + Starlight, español)
+│   └── simulation/      Simulación del escritorio (Svelte 5 + Vite) → /demo
 │
-├── README.md · PLAN.md · REQUISITOS.md · DESIGN-FIDELITY.md · SOFTWARE.md · CONTEXT.md
+├── os/                  ══ PARTE 2 · La distro ══
+│   ├── iso/             Perfil archiso (Fase 3)
+│   ├── packages/        PKGBUILDs propios (Fase 4)
+│   ├── dotfiles/        Hyprland, terminal, entorno (Fase 2)
+│   ├── shell/           Shell del escritorio (Fase 2 — ver ADR-0005)
+│   ├── installer/       Instalador gráfico (Fase 4)
+│   ├── branding/        Identidad: logo, iconos, wallpapers (Fase 0)
+│   └── scripts/         Build de ISO, QEMU, bootstrap
 │
-├── frontend/            ← LA SIMULACIÓN (Svelte 5 + Vite + pnpm, proyecto propio)
-│   ├── src/             ← components/, state/, helpers/, configs/, css/
-│   └── public/app-icons ← iconos (PROVISIONALES, se reemplazan por propios)
+├── design/
+│   ├── tokens/          Fuente única de verdad visual (tokens.json)
+│   └── references/      Referencias de estudio (Aqua Library, etc.)
 │
-└── archive/             ← versiones descartadas (referencia histórica)
+├── docs/                Ingeniería (interno; la wiki pública está en web/site)
+│   ├── decisions/       ADRs: decisiones técnicas con justificación
+│   ├── research/        Investigación: decoraciones, energía, hardware
+│   └── PLAN.md · REQUISITOS.md · SOFTWARE.md · CONTEXT.md · DESIGN-FIDELITY.md
+│
+└── archive/             Versiones descartadas (referencia histórica)
 ```
 
-**Dos proyectos independientes:** la **web** vive en la raíz (`pnpm dev` → puerto 3000) y la
-**simulación** en `frontend/` (`cd frontend && pnpm dev` → puerto 5173). En despliegue, la web se
-publica en `/` y la simulación compilada se sirve bajo `/frontend` (o un subdominio).
-
-## 🗂️ Estrategia de repositorios
-
-| Repo | Contenido | Estado |
-|---|---|---|
-| **archmac** (este) | **Web del proyecto + documentación + simulación** del sistema (unificadas). Es lo público/showcase. | activo |
-| **archmac-os** (nuevo) | La **distro real**: perfil archiso, dotfiles Hyprland, shell nativo (AGS/Astal), paquetes, instalador, branding. | por crear |
-
-**Respuesta corta:** **2 repos**. Web + simulación + docs van **juntos** aquí (es lo que vas a
-publicar). El software de la distro va en un repo **independiente** (`archmac-os`), porque tiene
-otro stack, otro ciclo de releases y otras herramientas (ver [SOFTWARE.md](SOFTWARE.md)).
-
-## ▶️ Ejecutar la simulación
+## ▶️ Desarrollo
 
 ```bash
-cd frontend
-pnpm install
-pnpm dev        # http://localhost:5173
+# Web + documentación (http://localhost:4321)
+cd web/site && pnpm install && pnpm dev
+
+# Simulación del escritorio (http://localhost:5173/demo/)
+cd web/simulation && pnpm install && pnpm dev
 ```
 
-## ✅ Estado del prototipo (resumen)
+> **Demo en desarrollo:** el sitio hace proxy de `/demo/` al puerto 5173, así que para que el
+> botón «Ver demo» funcione en local deben estar corriendo **ambos** servidores. En producción
+> no hace falta: `build:all` copia la demo dentro de `dist/demo`.
 
-Hecho: escritorio (wallpaper, dock con magnificación/rebote/indicadores, barra superior con
-iconos de estado propios), **ventanas** (semáforo, arrastrar, redimensionar, maximizar con FLIP,
-**minimizar/restaurar con efecto genie**, abrir/cerrar animados), **Spotlight**, **Launchpad**,
-cambiador de apps (⌘Tab), **Centro de Control** (brillo/sonido/tema/acento), app de **Ajustes**
-(Apariencia funcional), apps (Calculadora, Calendario, Acerca de) y placeholders, **arranque
-UEFI** (menú estilo GRUB) → **Recovery** → escritorio, e **instalador gráfico ArchMacInstall**
-(como app del escritorio). Tema claro/oscuro + 7 acentos.
+**Despliegue:** un solo artefacto estático. `cd web/site && pnpm build:all` construye la
+simulación (base `/demo/`), el sitio, y copia la demo dentro de `web/site/dist/demo` — el
+botón «Ver demo» del sitio apunta ahí. Se publica `web/site/dist` como raíz del dominio.
 
-Pendiente (ver [REQUISITOS.md](REQUISITOS.md) y [DESIGN-FIDELITY.md](DESIGN-FIDELITY.md)):
-Centro de Notificaciones + widgets, pantalla de bloqueo/login, menús de app dinámicos,
-Mission Control, Finder navegable, *snapping* de ventanas, e **identidad propia** (logo/iconos).
+## ✅ Estado
+
+- **Simulación** — muy avanzada: ventanas (semáforo, arrastre, redimensionado 8 puntos,
+  maximizar FLIP, **genie** al minimizar), dock (magnificación, rebote, indicadores),
+  Spotlight, Launchpad, ⌘Tab, Centro de Control, Ajustes, arranque UEFI → Recovery →
+  instalador gráfico, tema claro/oscuro + 7 acentos.
+- **Web/docs** — scaffold completo (Astro + Starlight): estructura entera de la wiki en
+  español (38 páginas), búsqueda, tema propio inicial. **Sin contenido aún** (se escribe junto
+  al desarrollo real).
+- **Distro** — no iniciada. El plan por fases está en [docs/PLAN.md](docs/PLAN.md) y el paso a
+  paso técnico en [docs/SOFTWARE.md](docs/SOFTWARE.md).
+
+## 📚 Documentos clave
+
+| Documento | Qué contiene |
+|---|---|
+| [docs/CONTEXT.md](docs/CONTEXT.md) | Contexto completo para retomar el proyecto |
+| [docs/PLAN.md](docs/PLAN.md) | Plan maestro por fases |
+| [docs/REQUISITOS.md](docs/REQUISITOS.md) | Requisitos funcionales/no funcionales (SRS) |
+| [docs/SOFTWARE.md](docs/SOFTWARE.md) | Cómo se construye la distro real |
+| [docs/decisions/](docs/decisions/README.md) | Decisiones de arquitectura (ADRs) |
+| [docs/research/](docs/research/) | Investigaciones: decoraciones, energía, hardware |
 
 ## ⚖️ Nota legal
 
-Los **iconos, wallpapers y el logo de Apple** que se ven en la simulación son **PROVISIONALES**:
-sirven para clavar el look durante el prototipo, pero **deben reemplazarse por iconografía e
-identidad propias de ArchMac antes de distribuir** ninguna ISO, por temas de marca/copyright.
-
-## 🔗 Referencias
-
-- [512pixels — Aqua Screenshot Library](https://512pixels.net/projects/aqua-screenshot-library/) — evolución visual de macOS.
-- **Efecto genie** (minimizar): la técnica es una *deformación de malla* (la ventana se captura
-  como textura y sus vértices se curvan hacia el dock con dos animaciones superpuestas).
-  Estudiado a partir de [HarshilShah/Genie](https://github.com/HarshilShah/Genie) (SpriteKit) y
-  [Ciechan/BCGenieEffect](https://github.com/Ciechan/BCGenieEffect) (image slicing + CATransform3D).
-
-> La base del frontend partió de un proyecto open-source (MIT) de simulación de macOS en Svelte,
-> **reescrito y rebrandeado por completo** para ArchMac (sin branding ni enlaces del autor original).
+Los **iconos, wallpapers y el logo de Apple** de la simulación son **PROVISIONALES** (sirven
+para clavar el look durante el prototipo). Deben reemplazarse por identidad propia antes de
+distribuir cualquier ISO, junto con el nombre definitivo del proyecto.

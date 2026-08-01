@@ -1,0 +1,15 @@
+# Normalización de fin de línea.
+* text=auto
+
+# Todo lo que consume Linux (la distro) debe ser SIEMPRE LF, aunque se edite en Windows.
+os/** text=auto eol=lf
+*.sh text eol=lf
+*.mjs text eol=lf
+
+# Binarios comunes
+*.png binary
+*.jpg binary
+*.webp binary
+*.ico binary
+*.woff binary
+*.woff2 binary

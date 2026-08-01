@@ -1,15 +1,21 @@
-./node_modules/
-./dist/
-./.DS_Store
-./*.local
-./.preview*.log
-./frontend/node_modules/
-./frontend/dist/
+# Dependencias y builds (cualquier nivel)
+node_modules/
+dist/
+.astro/
+.vite/
 
-./project/node_modules/
-./project/dist/
-./project/.DS_Store
-./project/*.local
-./project/.preview*.log
-./project/frontend/node_modules/
-./project/frontend/dist/
+# Salida del build de la ISO
+os/iso/out/
+
+# Sistema / editor
+.DS_Store
+Thumbs.db
+
+# Entorno local
+*.local
+.env
+.env.*
+
+# Logs y artefactos de herramientas
+.preview*.log
+.playwright-mcp/

@@ -1,0 +1,17 @@
+{
+	"version": "0.0.1",
+	"configurations": [
+		{
+			"name": "docs",
+			"runtimeExecutable": "pnpm",
+			"runtimeArgs": ["--dir", "web/site", "dev"],
+			"port": 4321
+		},
+		{
+			"name": "simulation",
+			"runtimeExecutable": "pnpm",
+			"runtimeArgs": ["--dir", "web/simulation", "dev"],
+			"port": 5173
+		}
+	]
+}

@@ -1,0 +1,55 @@
+# Paquetes de ArchMac añadidos sobre la lista de releng (uno por línea).
+# El escritorio live debe demostrar la experiencia: Hyprland + apps mínimas.
+
+# --- Compositor y Wayland ---
+hyprland
+xdg-desktop-portal-hyprland
+xorg-xwayland
+qt5-wayland
+qt6-wayland
+
+# --- Sesión / utilidades del escritorio (provisionales hasta el shell propio) ---
+kitty
+wofi
+waybar
+hyprpaper
+brightnessctl
+playerctl
+pamixer
+grim
+slurp
+wl-clipboard
+cliphist
+
+# --- Audio ---
+pipewire
+pipewire-alsa
+pipewire-pulse
+pipewire-jack
+wireplumber
+
+# --- Red (releng ya trae iwd; NetworkManager es nuestra elección de UX) ---
+networkmanager
+network-manager-applet
+
+# --- Gráficos ---
+mesa
+vulkan-radeon
+vulkan-intel
+intel-media-driver
+libva-mesa-driver
+
+# --- Tipografías (Inter = UI, JetBrains Mono = código) ---
+inter-font
+ttf-jetbrains-mono
+noto-fonts
+noto-fonts-emoji
+noto-fonts-cjk
+
+# --- Polkit / integración ---
+polkit
+polkit-gnome
+
+# --- Herramientas útiles en live ---
+htop
+git
