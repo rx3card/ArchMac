@@ -21,15 +21,12 @@ La VM con entorno gráfico es donde se desarrolla y se siente la experiencia rea
 
    ```bash
    sudo pacman -Syu git
-   git clone <URL-del-repo> ArchMac   # o carpeta compartida de VirtualBox
-   cd ArchMac
-   # Instalar el escritorio ArchMac (Hyprland + dotfiles):
-   sudo pacman -S --needed $(grep -Ev '^\s*(#|$)' os/iso/packages-extra.txt)
-   mkdir -p ~/.config && cp -r os/dotfiles/* ~/.config/
-   Hyprland   # arranca el escritorio
+   git clone https://github.com/rx3card/ArchMac.git && cd ArchMac
+   bash os/scripts/setup-desktop.sh   # paquetes + dotfiles + wallpaper, idempotente
+   Hyprland                           # arranca el escritorio
    ```
 
-6. Iterar: editar `os/dotfiles/`, recargar Hyprland (`hyprctl reload`), sentir, repetir.
+6. Iterar: `git pull && bash os/scripts/setup-desktop.sh` (recarga solo si Hyprland está activo).
 
 > Nota GPU: dentro de VirtualBox las animaciones no rinden como en hardware real (la
 > aceleración 3D de VBox con Wayland es limitada). Para *evaluar fluidez real*, la referencia
