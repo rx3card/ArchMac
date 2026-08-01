@@ -1,171 +1,161 @@
 # ArchMac — Contexto completo del proyecto (handoff)
 
-> ⚠️ **Actualización 2026-07-31 — reestructuración a monorepo.** El repo se reorganizó:
-> la simulación vive en **`web/simulation`** (antes `project/frontend`), la web/documentación
-> es un proyecto **Astro + Starlight** nuevo en **`web/site`**, los documentos de ingeniería
-> están en **`docs/`**, la distro se desarrolla en **`os/`** (ya no habrá repo `archmac-os`
-> separado — ver [decisions/ADR-0001-monorepo.md](decisions/ADR-0001-monorepo.md)), y los
-> tokens visuales en **`design/tokens/`**. Las decisiones técnicas nuevas están en
-> [decisions/](decisions/README.md) y las investigaciones abiertas (decoraciones de ventana,
-> energía, hardware) en [research/](research/). Las rutas mencionadas más abajo en este
-> documento son anteriores a ese cambio.
-
-> Documento para **retomar el proyecto en una conversación nueva** con todo el contexto.
-> Resume qué es ArchMac, qué decisiones se tomaron, qué está hecho, las convenciones, los
-> "gotchas" y qué sigue. Léelo junto a: `README.md`, `PLAN.md`, `REQUISITOS.md`,
-> `DESIGN-FIDELITY.md`, `SOFTWARE.md`.
+> **Documento para retomar el proyecto en cualquier momento, en cualquier PC, en una
+> conversación nueva.** Resume qué es ArchMac, qué está hecho, cómo se levanta el entorno,
+> las decisiones tomadas y qué sigue.
+>
+> **Cómo usarlo:** abre una conversación nueva, di *"lee docs/CONTEXT.md del repo ArchMac"* y
+> continúa desde «Qué sigue».
+>
+> Última actualización: 2026-07-31.
 
 ---
 
 ## 1. Qué es ArchMac
 
 Distribución **Linux basada en Arch** con experiencia de escritorio **premium inspirada en
-macOS**, sobre **Wayland/Hyprland**. No es un kernel propio; es Arch **configurado y vestido**
-para sentirse como macOS, con identidad propia, instalador gráfico e ISO.
+macOS** sobre **Wayland/Hyprland**. No es un kernel propio: es Arch **configurado y vestido**
+para sentirse como macOS, con identidad propia, ISO e instalador gráfico.
 
-El usuario escribe en **español**, prefiere que recomiende y decida ("lo que tú mejor creas"), y
-se frustra cuando se gasta mucho tiempo/tokens en verificación: **pide codificar con decisión y
-confiar en `pnpm check`**, sin loops largos de pruebas.
+**Objetivos:** facilidad de uso de Windows 10/macOS · UI/UX nivel macOS (animaciones,
+transparencias, blur, sombras) · rendimiento comparable a un Arch minimalista · funcionar bien
+en **4 GB de RAM** · estabilidad, seguridad y mantenibilidad.
 
-## 2. Arquitectura: dos pistas + dos repos
-
-- **Pista web / simulación** = este repo (`ArchMac/`). Prototipo web que simula el escritorio.
-  También albergará la **web del proyecto + documentación** (unificadas). Es lo público/showcase.
-- **Pista software / distro** = repo aparte **`archmac-os`** (ya creado el esqueleto en
-  `C:\Users\rojas\Dev\archmac-os`). El SO real: Hyprland + shell AGS + archiso + instalador.
-
-**Repos: 2.** `archmac` (web+simulación+docs) y `archmac-os` (distro).
-
-## 3. El frontend (simulación) — stack y convenciones
-
-- Base: **fork de `macos-web`** (proyecto open-source MIT de simulación de macOS en Svelte),
-  **reescrito y rebrandeado por completo**. Se eliminó TODO el branding del autor original
-  (Puru Vijay) y el `.git` original.
-- Stack: **Svelte 5 + Vite + pnpm** (NO SvelteKit). TypeScript estricto.
-- **Alias de imports: `$lib` → `src/`** (definido en `vite.config.ts` y `tsconfig.json`).
-  ⚠️ Antes era el emoji `🍎`; se reemplazó en todo el código (el usuario lo pidió quitar).
-- Iconos: `unplugin-icons` con `~icons/mdi/...` etc. (prefijo `~icons` distinto del alias).
-- Comandos: `cd frontend && pnpm install && pnpm dev` (puerto **5173**), `pnpm check`, `pnpm build`.
-
-### Decisiones de tecnología (ya cerradas)
-- Prototipo web en **SvelteKit/Svelte** (no Astro): el usuario lo confirmó; Astro es para
-  contenido, no para una app interactiva. (Acabó siendo el fork de macos-web, Svelte 5 + Vite.)
-- Quickshell (QML) **no** corre en navegador (es nativo) → descartado para la simulación.
-- Tipografía: **Inter** (sustituto libre de SF Pro).
-- "Inspirado en macOS", **NO clon**. Los **iconos, wallpapers y logo de Apple del prototipo son
-  PROVISIONALES** → reemplazar por identidad propia antes de cualquier ISO (tema legal).
-- Era de diseño objetivo: **Big Sur → Sequoia** (Ventura/Sonoma).
-
-## 4. Qué está IMPLEMENTADO en la simulación
-
-**Escritorio/barras**
-- Wallpaper Ventura · dock flotante (magnificación, rebote, indicadores, separadores, fallback
-  de icono png para apps sin `.webp`).
-- Barra superior: **menú Apple funcional** (Instalar, Recovery, Reiniciar, Apagar, Acerca de…),
-  reloj, **iconos de estado propios en SVG** (Wi-Fi, batería, Spotlight) en `components/icons/`.
-- **Centro de Control** (ActionCenter): tema, animaciones, color de acento, fondo, notch, y
-  **sliders de Brillo y Sonido** (`ControlSlider.svelte`, estado en `state/display.svelte.ts`).
-
-**Ventanas** (`components/Desktop/Window/Window.svelte`)
-- Semáforo (cerrar/minimizar/maximizar), arrastrar, **redimensionar por 8 bordes/esquinas**,
-  foco (z-index).
-- **Maximizar/restaurar con FLIP** (anima solo `transform`, GPU; desactiva blur durante la
-  animación con la clase `.flipping`). Usa clase CSS `.maximized`.
-- **Minimizar/restaurar con efecto GENIE** (ver §6).
-- **Abrir/cerrar animados** (escala + fade simétricos, `in:`/`out:` transitions).
-- Posición controlada por **neodrag v3**, que posiciona con la propiedad CSS **`translate`** (no
-  `transform`) — esto es clave para varios fixes.
-
-**Navegación**
-- **Spotlight** (⌘/Ctrl+Espacio), **Launchpad** (dock/F4), **cambiador de apps** (⌘/Ctrl+Tab y
-  swipe horizontal). Estado en `state/system.svelte.ts` y `state/switcher.svelte.ts`; helper
-  `helpers/open-app.ts`. Manejador global de teclado/wheel en `Desktop.svelte`.
-- ⚠️ Los gestos de 3/4 dedos **no los expone el navegador** (los intercepta el SO) → se simulan
-  con atajos/botones/swipe.
-
-**Apps** (catálogo en `configs/apps/apps-config.ts`, ~16 apps)
-- Reales: Calculadora, Calendario, **Acerca de ArchMac** (`AboutArchMac`, id `about-archmac`),
-  **Ajustes** (`SystemSettings`, id `system-preferences`, panel **Apariencia funcional**: tema +
-  7 acentos), Wallpapers, App Store.
-- Placeholder (`PlaceholderApp`): Safari, Mail, Mensajes, Mapas, Notas, Música, Terminal, VSCode.
-- **Instalador** (id `install`, icono propio `/app-icons/apple-install.svg` con logo Apple) — es
-  **una app del escritorio** (no pantalla aparte).
-- `install` y `about-archmac` están **ocultos del dock** (`dock_hidden: true`) pero salen en
-  Launchpad/menú Apple. Config soporta `icon?` para iconos personalizados.
-
-**Pantallas de sistema** (conmutador `state/screen.svelte.ts` + `App.svelte`; `main.ts` monta App)
-- **UEFI / Startup Manager** (`Boot/UefiBoot.svelte`): menú vertical estilo GRUB (ArchMac,
-  Opciones avanzadas→Recovery, Firmware, Reiniciar, Apagar) con cuenta atrás de 5s. **Arranca por
-  aquí por defecto** (`screen.current = 'uefi'`) → desktop. Fondo oscuro con formas suaves
-  (el usuario prefirió este fondo, NO el limpio).
-- **Recovery** (`Recovery/Recovery.svelte`): "Utilidades de ArchMac" (Reinstalar→abre instalador,
-  Disco, Terminal, Restaurar).
-- **Instalador** (`Installer/Installer.svelte`): asistente por pasos (bienvenida, idioma, disco,
-  cuenta, resumen, instalación animada, fin→reiniciar). Renderizado como ventana (app).
-- **Power-off** con botón de encendido.
-
-**Tema**: claro/oscuro + 7 acentos (orange, green, cyan, blue, indigo, purple, pink) en
-`preferences.theme`; el `$effect` en `state/preferences.svelte.ts` aplica clase + `--system-color-primary`.
-
-## 5. Documentos del repo
-- `README.md` — visión, estructura, estrategia de repos, estado, referencias, nota legal.
-- `PLAN.md` — plan maestro por fases.
-- `REQUISITOS.md` — requisitos funcionales/no funcionales (SRS) + "fuera de alcance".
-- `DESIGN-FIDELITY.md` — eras de macOS + huecos de fidelidad + roadmap (ref: 512pixels Aqua Library).
-- `SOFTWARE.md` — cómo construir la distro real (dwm vs Hyprland, AGS, optimización, pasos, repos).
-- `CONTEXT.md` — este documento.
-- `archive/frontend-scratch-v0/` — primer prototipo SvelteKit desde cero (descartado, referencia).
-
-## 6. El efecto GENIE (importante, costó iterar)
-
-- **Qué es**: al minimizar, la ventana se "absorbe" hacia el dock deformándose como un embudo
-  (no es un simple `scale`). Técnica: capturar la ventana como **textura**, cortarla en **franjas**
-  (malla), y mover los vértices con **dos animaciones superpuestas** (slide/embudo + translate/
-  succión) y curva **quadraticEaseInOut**. Estudiado de HarshilShah/Genie y Ciechan/BCGenieEffect.
-- **Implementación actual** (`helpers/genie.ts`): **Canvas 2D** con ~90 franjas. Captura con
-  `html-to-image` (`captureWindow`). **Pre-carga** la captura al pasar el ratón por el botón
-  amarillo y al abrir la ventana (evita el "trabón" de ~380ms). Reutiliza la captura al restaurar.
-  El último fix: que **la parte superior también se colapse** al final (no solo la base):
-  `narrow = funnel + (1 - funnel) * trans`.
-- ⚠️ Se intentó una versión **WebGL** (malla texturizada) pero **renderizaba en blanco** (bug del
-  shader/programa sin resolver). Se volvió a la 2D, que sí funciona. Si se retoma WebGL, depurar
-  por qué no dibuja la textura (no había error de consola; posible `preserveDrawingBuffer`/uniform).
-
-## 7. "Gotchas" / cosas a recordar
-- **El dev server (vite/pnpm) se cae con frecuencia** tras HMRs estructurales rápidos. Solución:
-  reiniciar con `pnpm dev` en background y esperar "ready in". No es del código de producción.
-- Cambios en `genie.ts`/helpers a veces **no se aplican por HMR** (módulo helper) → recargar la
-  página entera para probar.
-- Cambios en `vite.config.ts` **requieren reiniciar** el server.
-- La herramienta de captura (Playwright) **llega tarde** para animaciones de ~600ms → para
-  verificar animaciones, muestrear píxeles del canvas con `getImageData` (2D) o subir
-  temporalmente la duración. WebGL `readPixels` no sirve sin `preserveDrawingBuffer`.
-- Regla del modo oscuro en `Window.svelte` ponía borde a TODOS los `<div>` hijos → excluir
-  `.resize-handle` y `.tl-container` (ya hecho).
-- Anillo de foco verde en buscadores: viene de `*:focus-visible { box-shadow: var(--system-focus-outline) }`
-  global (usa el acento) → desactivado en los inputs de Spotlight/Launchpad.
-
-## 8. Plan de la distro (resumen de SOFTWARE.md)
-- **No se escribe el SO en C**: Arch/Linux ya es C. Se trabaja en la **capa del escritorio**.
-- Compositor **Hyprland** (configurar, no reescribir). Shell propio en **AGS/Astal**
-  (TypeScript+JSX+CSS → widgets GTK) — reutiliza el diseño de la simulación.
-- C/Rust solo para piezas concretas (daemon, plugin de Hyprland para genie nativo); Rust > C.
-- **dwm descartado** (X11, tiling, sin efectos; opuesto al look macOS).
-- Pasos: identidad propia → **dotfiles + daily-drive** (Hyprland+AGS) → **archiso (ISO)** →
-  **instalador** (archinstall/Calamares) → paquetes/repo/actualizaciones → diferenciación.
-- Esqueleto `archmac-os` ya creado: `dotfiles/hypr/hyprland.conf` (config estilo macOS),
-  `shell-ags/widget/TopBar.tsx` (ejemplo de barra), `archiso/`, `packages/`, `branding/`.
-
-## 9. Próximos pasos sugeridos
-**Simulación** (por impacto, ver DESIGN-FIDELITY.md): Centro de Notificaciones + widgets ·
-pantalla de bloqueo/login · menús de app dinámicos · Mission Control · Finder navegable ·
-snapping de ventanas · afinar vibrancy · **identidad propia** (logo/iconos/wallpaper).
-
-**Software**: arrancar `archmac-os` — Arch en VM → Hyprland → barra y **dock en AGS** → daily-drive.
+**Cómo trabaja el propietario:** escribe en español, quiere **avance visible y rápido**, prefiere
+que se implemente todo de una vez en lugar de por fases, y pide investigación real (comparar
+alternativas, justificar técnicamente) antes de decidir.
 
 ---
 
-### Cómo usar este documento en una conversación nueva
-Pega/menciona este archivo (`CONTEXT.md`) y di en qué quieres trabajar (p. ej. "sigue con el
-Centro de Notificaciones de la simulación" o "empieza el dock en AGS de archmac-os"). El resto del
-detalle está en los `.md` hermanos del repo.
+## 2. Estructura del repositorio (monorepo)
+
+```
+ArchMac/                        github.com/rx3card/ArchMac  (público)
+├── web/
+│   ├── site/          Web + wiki (Astro 7 + Starlight, español). 38 páginas estructurales
+│   │                  SIN contenido (a propósito). Demo integrada en /demo.
+│   └── simulation/    LA SIMULACIÓN (Svelte 5 + Vite). Es el PLANO DE DISEÑO del sistema.
+├── os/                LA DISTRO
+│   ├── iso/           Perfil archiso (profiledef, packages-extra.txt, airootfs-overlay)
+│   ├── dotfiles/      hypr/, kitty/, gtk-3.0/, gtk-4.0/  → se copian a ~/.config
+│   ├── shell/quickshell/   EL SHELL PROPIO: shell.qml, TopBar.qml, Dock.qml, assets/
+│   ├── scripts/       setup-desktop.sh (instala/actualiza todo), build-iso.sh, test-iso.ps1
+│   ├── branding/wallpapers/  ventura-1..5.jpg
+│   ├── GETTING-STARTED.md    Montar el entorno paso a paso
+│   └── PORTING.md            Mapa: componente de la simulación → pieza nativa
+├── design/tokens/     tokens.json (fuente única de verdad visual)
+├── docs/              PLAN, REQUISITOS, SOFTWARE, DESIGN-FIDELITY, CONTEXT (este)
+│   ├── decisions/     ADR-0001..0005 (decisiones con alternativas comparadas)
+│   └── research/      decoraciones.md, energia.md, hardware.md
+└── archive/           Versiones descartadas
+```
+
+---
+
+## 3. Estado actual — lo que YA FUNCIONA en el sistema real
+
+Verificado en VM (VirtualBox, Arch + Hyprland 0.56):
+
+- **Hyprland** configurado: ventanas **flotantes por defecto** (filosofía macOS, no tiling),
+  blur, sombras, esquinas 10px, animaciones con curvas macOS, scroll natural, gestos de 3
+  dedos, atajos ⌘ (Q, Espacio, Tab, ⇧3/4, ⌃←/→).
+- **Wallpaper** Ventura (swaybg; hyprpaper NO lee webp → por eso los JPG en branding/).
+- **Barra superior propia** (Quickshell): logo , "ArchMac", menús en español, iconos de
+  estado **SVG copiados de la simulación** (Wi-Fi, batería, lupa) y reloj real en español.
+- **Dock propio** (Quickshell): panel de vidrio, **magnificación gaussiana**, **rebote** al
+  lanzar, etiquetas al hover, e **iconos de la simulación** (finder, launchpad, safari,
+  calendar, calculator, notes, terminal) conectados a apps reales.
+- **Apps instaladas:** Firefox, Nautilus, Calendario, Calculadora, Editor, kitty.
+- **Tema:** WhiteSur-Dark GTK + cursores WhiteSur + Papirus + Inter.
+- **Semáforo macOS** en apps GTK vía `gtk.css` propio (círculos 13px, colores reales).
+- **Autoarranque:** login en tty1 → escritorio directo.
+
+### Pendiente / en verificación
+- **hyprbars** (semáforo dibujado por el compositor para apps sin cabecera propia, como la
+  terminal): último bloque enviado; el script imprime `hyprbars: activo ✔` o un AVISO rojo.
+- **Firefox** dibuja su propio marco (botones a la derecha) → configurar `browser.tabs.inTitlebar`.
+- **Migración de hyprland.conf a Lua**: obligatoria antes de Hyprland 0.57 (aviso amarillo).
+
+---
+
+## 4. Cómo levantar el entorno EN UN PC NUEVO
+
+**El repo es la fuente de verdad. La VM es desechable.** En cualquier máquina:
+
+1. VirtualBox (o VM/hardware real) → instalar **Arch** con `archinstall`
+   (perfil **Minimal**, systemd-boot, NetworkManager, pipewire, usuario con sudo, paquete `git`).
+   - ⚠️ **VirtualBox: DESACTIVAR la aceleración 3D** (con 3D, Hyprland renderiza en negro con
+     solo el cursor). Controlador VMSVGA, 128 MB de vídeo.
+2. Dentro del Arch instalado:
+   ```bash
+   git clone https://github.com/rx3card/ArchMac.git && cd ArchMac
+   bash os/scripts/setup-desktop.sh
+   start-hyprland
+   ```
+3. Iterar siempre así: `cd ~/ArchMac && git pull && bash os/scripts/setup-desktop.sh`
+   (es idempotente y recarga en caliente si Hyprland está corriendo).
+
+**Para llevarse la VM tal cual** (opcional, no necesario): VirtualBox → Archivo → *Exportar
+servicio virtualizado* → genera un `.ova` que se importa en el PC nuevo.
+
+**En un PC potente:** además de la VM, ya se puede construir la ISO
+(`sudo bash os/scripts/build-iso.sh` en Arch/WSL2) y arrancarla desde USB en hardware real —
+ahí es donde se evalúa la fluidez de verdad (la VM no representa el rendimiento real).
+
+---
+
+## 5. Decisiones tomadas (resumen; detalle en docs/decisions/)
+
+| # | Decisión | Razón corta |
+|---|---|---|
+| 0001 | **Monorepo** (web/ + os/) | Un solo lugar; tokens compartidos. Sustituye la idea de 2 repos |
+| 0002 | **Arch Linux** como base | Rolling (stack Wayland moderno), archiso, PKGBUILD, AUR, Arch Wiki |
+| 0003 | **Astro + Starlight** para la web/docs | Cero JS, búsqueda sin backend, theming total |
+| 0004 | **Decoraciones por capas** | GTK: retematizar sus botones · Qt: quitar CSD · resto: hyprbars |
+| 0005 | Shell: **Quickshell** (QML) | Motor de animaciones GPU; en uso desde el dock v0 |
+
+**Riesgo P0 abierto:** el nombre «ArchMac» choca con la política de marcas de Arch Linux y con
+«Mac» de Apple; los iconos/wallpapers de Apple son **provisionales**. Resolver en Fase 0 de
+branding antes de publicar ISO. El propietario decidió posponerlo conscientemente.
+
+---
+
+## 6. Gotchas aprendidos (no repetir errores)
+
+- **VirtualBox + aceleración 3D = pantalla negra** con Hyprland. Desactivarla.
+- **hyprpaper no lee `.webp`** → usar JPG (o swaybg, que es lo que usamos).
+- Hyprland **0.51 cambió la sintaxis**: `gesture = 3, horizontal, workspace`,
+  `windowrule = match:class ..., float on`, `layerrule = blur on, match:namespace ...`.
+  `misc:vfr` y `dwindle:pseudotile` ya no existen como estaban.
+- Hyprland **0.56**: se arranca con `start-hyprland`, no `Hyprland`.
+- Las reglas `plugin:hyprbars:*` **fallan si se ponen en el .conf** antes de que el plugin
+  cargue → aplicarlas en caliente con `hyprctl keyword` tras `hyprpm reload`.
+- Los iconos de la barra necesitan **ttf-nerd-fonts-symbols** (si no, salen cuadritos □).
+- Las apps GTK **solo leen `gtk.css` al abrir la ventana** → cerrar y reabrir para ver cambios.
+- No poner `&` al final de una cadena con `sudo`: el script se va a segundo plano y no puede
+  pedir la contraseña.
+
+---
+
+## 7. Qué sigue (orden recomendado)
+
+**A. Terminar la capa visual del escritorio (alto impacto visible)**
+1. Verificar/arreglar **hyprbars** → semáforo en terminal y apps sin cabecera.
+2. **Indicadores de apps abiertas** en el dock (punto bajo el icono) + separador + papelera.
+3. **Menús de la barra según la app activa** (leer ventana enfocada vía IPC de Hyprland).
+4. **Spotlight propio** en Quickshell (reemplaza wofi) y **Launchpad**.
+5. **Centro de Control** (brillo, volumen, Wi-Fi, tema) y **notificaciones**.
+6. Conectar los iconos de estado a datos reales (batería, red, volumen).
+
+**B. Deuda técnica**
+7. Migrar `hyprland.conf` a **Lua** (obligatorio antes de 0.57).
+8. Generador de tokens: `design/tokens/tokens.json` → CSS/QML (hoy se sincroniza a mano).
+
+**C. Sistema**
+9. **Construir la ISO** (`build-iso.sh`) y probarla en QEMU/USB.
+10. Lockscreen (hyprlock), greeter, instalador gráfico.
+11. **Genie nativo** al minimizar: plugin C++ de Hyprland (la matemática ya está resuelta en
+    `web/simulation/src/helpers/genie.ts`).
+
+**D. Cuando el propietario lo decida**
+12. Identidad propia: nombre definitivo, logo, iconos y wallpapers propios (quita el riesgo legal).
